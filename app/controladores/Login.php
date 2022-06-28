@@ -9,8 +9,12 @@ class Login extends Controlador {
     }
 
     function caratula(){
-        $datos = [];
+        $datos = ["titulo" => "Login", "menu" =>false];
         $this->vista("loginVista", $datos);     
+    }
+
+    function olvido(){
+        print "Hola desde el olvido";
     }
     
 }
