@@ -26,22 +26,29 @@ crossorigin="anonymous"></script>
         <div class="row content">
             <div class="col-sm-2"></div> <!--pantalla pequeño se maneja por dos colum-->
             <div class="col-sm-8"> <!--8 columnas por ahora-->
-    <form action="#"></form>
-    <table>
-        <tr>
-            <td>Usuario:</td>
-            <td><input type="text" name="usuario"></td>
-        </tr>
-        <tr>
-            <td>Clave acceso:</td>
-            <td><input type="password" name="clave"></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>  <!--No nececitamos nada-->
-            <td><input type="submit" value="Enviar"></td>
-        </tr>
-    </table>
+            <h1 class="text-center">Entrada al sistema</h1>
+            <div class="card p-4 bg-light"> <!--pading 4 bakgrou-->
+    <form action="login/verifica/">
+     <div class="form-group text-left"> 
+        <label for="usuario"> Usuario: </label>
+        <input type="text" name="usuario" class="form-control">
+     </div>
+     <div class="form-group text-left">
+        <label for="clave"> Clave acceso: </label>
+        <input type="password" name="clave" class="form-control">
+     </div class="form-group text-left"><br>
+     
+     <div>
+        <input type="submit" value="Enviar" class="btn btn-success"></td>
+     </div><br>
+     <div>
+        <input type="checkbox" name="recordar" >
+        <label for="recordar">Recordar</label>  
+     </div class="form-group text-left"><br>  
     </form>
+    </div> <!--para crear un cuadro-->
+    <a href="login/alta/" >Darse de alta en el sistema</a><br><br>
+    <a href="login/olvido/" >¿Olvide mi clave de acceso?</a>
     </div> <!--8 colum-->
     <div class="col-sm-2"></div>
     </div> <!--row-->
