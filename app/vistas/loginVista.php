@@ -1,7 +1,7 @@
 <?php include_once("encabezado.php");   ?>
             <h1 class="text-center">Entrada al sistema</h1>
             <div class="card p-4 bg-light"> <!--pading 4 bakgrou-->
-    <form action="login/verifica/">
+    <form action="<?php print RUTA; ?>login/verifica/">
      <div class="form-group text-left"> 
         <label for="usuario"> Usuario: </label>
         <input type="text" name="usuario" class="form-control">
@@ -20,6 +20,6 @@
      </div class="form-group text-left"><br>  
     </form>
     </div> <!--para crear un cuadro-->
-    <a href="login/alta/" >Darse de alta en el sistema</a><br><br>
-    <a href="login/olvido/" >¿Olvide mi clave de acceso?</a>
-    <?php include_once("piepagina.php");   ?>
+    <a href="<?php print RUTA; ?>login/registro/" >Darse de alta en el sistema</a><br><br>
+    <a href="<?php print RUTA; ?>login/olvido/" >¿Olvide mi clave de acceso?</a>
+<?php include_once("piepagina.php");   ?>

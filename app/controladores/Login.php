@@ -16,6 +16,11 @@ class Login extends Controlador {
     function olvido(){
         print "Hola desde el olvido";
     }
+
+    function registro(){
+        $datos = ["titulo" => "Registro usuario", "menu" =>false];
+        $this->vista("loginRegistroVista", $datos);
+    }
     
 }
 
