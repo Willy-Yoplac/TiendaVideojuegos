@@ -6,7 +6,7 @@ class MySQLdb {
     private $host = "localhost";
     private $usuario = "root";
     private $clave = "";
-    private $db = "sanmarcos"; // OJO de prueba
+    private $db = "clientes_videojuegos"; 
     private $puerto = ""; //Creo que no VOY A NECESITAR
     private $conn; // coneccion
 
