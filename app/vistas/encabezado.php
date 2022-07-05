@@ -30,3 +30,15 @@ crossorigin="anonymous"></script>
         <div class="row content">
             <div class="col-sm-2"></div> <!--pantalla pequeño se maneja por dos colum-->
             <div class="col-sm-8"> <!--8 columnas por ahora-->
+            <?php
+            if (isset($datos["errores"])){
+                if(count($datos["errores"])>0){
+                    print "<div class='alert alert-danger mt-3'";
+                    foreach ($datos["errores"] as $key => $valor){
+                        print "<strong>* ".$valor."</strong>";
+                    }
+                    print "</div>";
+                }
+            }
+
+            ?>

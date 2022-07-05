@@ -19,6 +19,8 @@ class Login extends Controlador {
 
     function registro(){
         $errores = array();
+        $data = array(); //para capturar solo el dato erroneo
+
         if ($_SERVER['REQUEST_METHOD']=="POST"){
             $nombres = isset($_POST['nombre']) ? $_POST['nombre']:"";
             //si E en post -nombre regresamos NOMBRE si no una cad vacia
@@ -29,6 +31,16 @@ class Login extends Controlador {
             $clave2 = isset($_POST['clave2']) ? $_POST['clave2']:"";
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad']:"";
             $pais = isset($_POST['pais']) ? $_POST['pais']:"";
+            $data = [
+                "nombre" => $nombres,
+                "apellidoPaterno" => $apellido_paterno,
+                "apellidoMaterno" => $apellido_materno,
+                "correo" => $correo,
+                "clave1" => $clave1,
+                "clave2" => $clave2,
+                "ciudad" => $ciudad,
+                "pais" => $pais
+            ];
 
             //validadcion
             if($nombres==""){
@@ -62,7 +74,12 @@ class Login extends Controlador {
                 print "Dar de alta los errores en el modelo";
 
             }else{
-                var_dump($errores);
+                
+                $datos = ["titulo" => "Registro usuario", 
+                "menu" =>false,
+                 "errores"=>$errores,
+                "data" => $data];
+                $this->vista("loginRegistroVista", $datos);
             }
 
         }else{
