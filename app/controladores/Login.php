@@ -22,20 +22,20 @@ class Login extends Controlador {
         $data = array(); //para capturar solo el dato erroneo
 
         if ($_SERVER['REQUEST_METHOD']=="POST"){
-            $nombres = isset($_POST['nombre']) ? $_POST['nombre']:"";
+            $nombre = isset($_POST['nombre']) ? $_POST['nombre']:"";
             //si E en post -nombre regresamos NOMBRE si no una cad vacia
-            $apellido_paterno = isset($_POST['apellidoPaterno']) ? $_POST['apellidoPaterno']:"";
-            $apellido_materno = isset($_POST['apellidoMaterno']) ? $_POST['apellidoMaterno']:"";
-            $correo = isset($_POST['correo']) ? $_POST['correo']:"";
+            $apellidoPaterno = isset($_POST['apellidoPaterno']) ? $_POST['apellidoPaterno']:"";
+            $apellidoMaterno = isset($_POST['apellidoMaterno']) ? $_POST['apellidoMaterno']:"";
+            $email = isset($_POST['email']) ? $_POST['email']:"";
             $clave1 = isset($_POST['clave1']) ? $_POST['clave1']:"";
             $clave2 = isset($_POST['clave2']) ? $_POST['clave2']:"";
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad']:"";
             $pais = isset($_POST['pais']) ? $_POST['pais']:"";
             $data = [
-                "nombre" => $nombres,
-                "apellidoPaterno" => $apellido_paterno,
-                "apellidoMaterno" => $apellido_materno,
-                "correo" => $correo,
+                "nombre" => $nombre,
+                "apellidoPaterno" => $apellidoPaterno,
+                "apellidoMaterno" => $apellidoMaterno,
+                "email" => $email,
                 "clave1" => $clave1,
                 "clave2" => $clave2,
                 "ciudad" => $ciudad,
@@ -43,14 +43,14 @@ class Login extends Controlador {
             ];
 
             //validadcion
-            if($nombres==""){
+            if($nombre==""){
                 array_push($errores, "El nombre es requerido");
             }
-            if ($apellido_paterno==""){
+            if ($apellidoPaterno==""){
                 array_push($errores, "El apellido paterno es requerido");
             }
-            if ($correo==""){
-                array_push($errores, "El correo es requerido");
+            if ($email==""){
+                array_push($errores, "El email es requerido");
             }
             if ($clave1==""){
                 array_push($errores, "La clave de acceso es requerida");
@@ -67,17 +67,23 @@ class Login extends Controlador {
             if ($clave1!=$clave2){
                 array_push($errores, "Las claves de acceso no coinsiden");
             }
-            if (!filter_var($correo, FILTER_VALIDATE_EMAIL)){
-                array_push($errores, "El correo electronico no es valido");
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                array_push($errores, "El email electronico no es valido");
             }
             if (count($errores)==0){
-                print "Dar de alta los errores en el modelo";
+        
+               $r = $this->modelo->insertarRegistro($data);
+               if($r){
+                print "Se inserto correctamente el registro";
+               }else{
+                print "No se inserto el registro";
+               }
 
             }else{
                 
                 $datos = ["titulo" => "Registro usuario", 
                 "menu" =>false,
-                 "errores"=>$errores,
+                "errores"=>$errores,
                 "data" => $data];
                 $this->vista("loginRegistroVista", $datos);
             }

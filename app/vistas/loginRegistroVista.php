@@ -20,10 +20,10 @@
         value='<?php isset($datos["data"]["apellidoMaterno"])? print $datos["data"]["apellidoMaterno"]:""; ?>'>
     </div>
     <div class="form-group text-left">
-        <label for="correo">* Correio electronico:</label>
-        <input type="email" name="correo" id="correo" class="form-control" required
-        placeholder="Escriba su correo electronico" required
-        value='<?php isset($datos["data"]["correo"])? print $datos["data"]["correo"]:""; ?>'>
+        <label for="email">* Correio electronico:</label>
+        <input type="email" name="email" id="email" class="form-control" required
+        placeholder="Escriba su email electronico" required
+        value='<?php isset($datos["data"]["email"])? print $datos["data"]["email"]:""; ?>'>
     </div>
     <div class="form-group text-left">
         <label for="clave1">* Clave de acceso:</label>
