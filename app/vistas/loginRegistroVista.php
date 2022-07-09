@@ -48,7 +48,7 @@
         <label for="pais">* País:</label>
         <input type="text" name="pais" id="pais" class="form-control" required
         placeholder="Escriba su pais" required
-        value='<?php isset($datos["data"]["pais"])? print $datos["data"]["pais"]:""; ?>'>
+        value='<?php isset($datos["data"]  ["pais"])? print $datos["data"]["pais"]:""; ?>'>
     </div>
     <div class="form-group text-left" required>
         <label for="enviar"></label>

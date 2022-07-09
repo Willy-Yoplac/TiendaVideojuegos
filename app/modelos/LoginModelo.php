@@ -24,7 +24,7 @@ class LoginModelo{
             $r= $this->db->queryNoSelect($sql);
 
         }
-        return $r;
+        return $r; 
 
     }
     function validaCorreo($email){

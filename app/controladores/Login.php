@@ -74,9 +74,51 @@ class Login extends Controlador {
         
                $r = $this->modelo->insertarRegistro($data);
                if($r){
-                print "Se inserto correctamente el registro";
+                $datos = [
+                    "titulo" => "Nuestra ilusión es levantarnos cada día para seguir un camino de servicio",
+                    "menu" => false,
+                    "errores" => [],
+                    "data" => [],
+                    "subtitulo" => "Bienvenid@ a nuestra tienda ZONA-GAMES",
+                    "texto" => "En nombre de nuestra empresa te damos 
+                    la más sincera bienvenida a nuestra tienda virtual, 
+                    en la que esperamos encontrarán todo lo que 
+                    necesitas.<br><br>El objetivo principal de este 
+                    canal de comunicación es plasmar los valores que nos
+                     respaldan: el compromiso social, la máxima calidad y 
+                     la voluntad de servicio, así como nuestro interés por 
+                     todas aquellas ventajas que nos ofrece la tecnología. 
+                     Todo ello tiene una presencia destacada en esta página web y 
+                     en nuestras propias decisiones.<br><br>El 18 de junio 
+                     comenzó una idea tan sencilla y a la vez tan responsable de
+                     crear esta tienda.<br><br>Sólo nos queda desearles un agradable 
+                      experiencia en nuestra tienda.<br><br>Atentamente: 
+                      Willy Yoplac, CEO",
+                    "color" => "alert-success",
+                    "url" => "menu",
+                    "colorBoton" => "btn-success",
+                    "textoBoton" => "Iniciar"
+                    ];
+                    $this->vista("mensajeVista",$datos);
+                
+                
                }else{
-                print "No se inserto el registro";
+                $datos = [
+                    "titulo" => "Error en el registro",
+                    "menu" => false,
+                    "errores" => [],
+                    "data" => [],
+                    "subtitulo" => "Error en el registro",
+                    "texto" => "Existió un error en el registro, 
+                    posiblemente ya existe ese correo en nuestra base de datos, 
+                    vuelva a intentarlo",
+                    "color" => "alert-danger",
+                    "url" => "login", //regresamos a login
+                    "colorBoton" => "btn-danger",
+                    "textoBoton" => "Regresar"
+                    ];
+                    $this->vista("mensajeVista",$datos);
+                
                }
 
             }else{
