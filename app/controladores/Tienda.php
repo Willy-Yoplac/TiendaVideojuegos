@@ -9,8 +9,16 @@ class Tienda extends Controlador {
     }
 
     function caratula(){
-        $datos = ["titulo" => "Bienvenido a Zona-Games", "menu" =>false];
-        $this->vista("tiendaVista", $datos);     
+    	$sesion = new Sesion();
+    	if ($sesion->getLogin()) {
+    		var_dump($sesion->getUsuario());
+    		$datos = ["titulo" => "Bienvenido a Zona-Games", "menu" =>false];
+        $this->vista("tiendaVista", $datos);  
+    	} else {
+    		header("location:".RUTA);
+    	}
+    	
+         
     }
 
 }

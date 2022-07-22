@@ -9,7 +9,19 @@ class Login extends Controlador {
     }
 
     function caratula(){
-        $datos = ["titulo" => "Login", "menu" =>false];
+        if(isset($_COOKIE["datos"])){
+            $datos_array = explode("|",$_COOKIE["datos"]);
+            $usuario = $datos_array[0];
+            $clave = $datos_array[1];
+            $data = [
+                "usuario" => $usuario,
+                "clave" => $clave,
+                "recordar" => "on"
+            ];
+        } else {
+            $data = [];
+        }
+        $datos = ["titulo" => "Login", "menu" =>false, "data" => $data];
         $this->vista("loginVista", $datos);     
     }
 
@@ -278,13 +290,28 @@ class Login extends Controlador {
             $clave = isset($_POST["clave"])?$_POST["clave"]:"";
             $recordar = isset($_POST["recordar"])?"on":"off";
             $errores = $this->modelo->verificar($usuario, $clave);
+            
+            //recuerdame
+            $valor = $usuario."|".$clave;
+            if($recordar=="on"){
+                $fecha = time()+(60*60*24*7);
+            } else {
+                $fecha = time() - 1;
+            }
+            setcookie("datos", $valor,$fecha,RUTA);
             //
             $data = [
                 "usuario" => $usuario,
                 "clave" => $clave,
                 "recordar" => $recordar
             ];
+            //Validacion
             if (empty($errores)) {
+                //Iniciamos sesión
+                $data = $this->modelo->getUsuarioCorreo($usuario);
+                $sesion = new Sesion();
+                $sesion->iniciarLogin($data);
+                //
                 header("location:".RUTA."tienda");
             } else {
                 $datos = ["titulo" => "Login", "menu" =>false, "errores" => $errores, "data" => $data];
