@@ -14,7 +14,75 @@ class Login extends Controlador {
     }
 
     function olvido(){
-        print "Hola desde el olvido";
+        $errores = array();
+        $data = array();
+        if ($_SERVER['REQUEST_METHOD']=="POST"){
+            $email = isset($_POST['email']) ? $_POST['email']:"";
+            if ($email==""){
+                array_push($errores, "El email es requerido");
+            }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                array_push($errores, "<br>"."El email electronico no es valido");
+            }
+            if(count($errores)==0){
+                if($this->modelo->validaCorreo($email)){
+                array_push($errores, "El correo electrónico no existe en la base de datos");
+                }else{// Si el correo no tienen ningun error
+                    if($this->modelo->enviarCorreo($email)){//si regresa True
+                        $datos = [
+                            "titulo" => "Cambio de clave de acceso",
+                            "menu" => false,
+                            "errores" => [],
+                            "data" => [],
+                            "subtitulo" => "Cambio de clave de acceso",
+                            "texto" => "Se ha enviado un correo a <b>".$email."</b> para que cambies tu clave de 
+                            acceso. Cualquier duda te puedes comunicar con 'soporte tecnico XD', recuerda 
+                            revisar tu bandeja de spam, saludos.",
+                            "color" => "alert-success",
+                            "url" => "login", //regresamos a login
+                            "colorBoton" => "btn-success",
+                            "textoBoton" => "Regresar"
+                            ];
+                            $this->vista("mensajeVista",$datos);
+
+                    }else{
+                        $datos = [
+                            "titulo" => "Error en el envio del Correo",
+                            "menu" => false,
+                            "errores" => [],
+                            "data" => [],
+                            "subtitulo" => "Error en el envio del Correo",
+                            "texto" => "Existió un un problema al enviar el correo electronico",
+                            "color" => "alert-danger",
+                            "url" => "login", //regresamos a login
+                            "colorBoton" => "btn-danger",
+                            "textoBoton" => "Regresar"
+                            ];
+                            $this->vista("mensajeVista",$datos);
+
+                    }
+                }
+            }          
+        }else{
+             $datos = [
+            "titulo" => "Olvido de la clave de la contraseña",
+            "menu" => false,
+            "errores" => [],
+            "data" => [],
+            "subtitulo" => "¿Olvidaste tu contraseña?",     
+            ];
+            $this->vista("loginOlvidoVista",$datos);
+        }
+        if(count($errores)){ // 0 no entre, != -> entra
+            $datos = [
+            "titulo" => "Olvido de clave de acceso", 
+            "menu" =>false,
+            "errores"=>$errores,
+            "subtitulo" => "¿Olvidaste tu contraseña?", 
+            "data" => []
+            ];
+                $this->vista("loginOlvidoVista", $datos);
+        } 
     }
 
     function registro(){
@@ -118,11 +186,9 @@ class Login extends Controlador {
                     "textoBoton" => "Regresar"
                     ];
                     $this->vista("mensajeVista",$datos);
-                
                }
 
-            }else{
-                
+            }else{              
                 $datos = ["titulo" => "Registro usuario", 
                 "menu" =>false,
                 "errores"=>$errores,
@@ -136,7 +202,98 @@ class Login extends Controlador {
             $this->vista("loginRegistroVista", $datos);
         }
     }
-    
+
+    function cambiaclave($data){
+        $errores = array();
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $id = isset($_POST["id"])?$_POST["id"]:"";
+            $clave1 = isset($_POST["clave1"])?$_POST["clave1"]:"";
+            $clave2 = isset($_POST["clave2"])?$_POST["clave2"]:"";
+            //validaciones
+            if ($clave1=="") {
+                array_push($errores, "La clave de acceso es requerida");
+            }
+            if ($clave2=="") {
+                array_push($errores, "La clave de acceso de verificación es requerida");
+            }
+            if ($clave1!=$clave2) {
+                array_push($errores, "Las claves de acceso no coinciden");
+            }
+            if (count($errores)) {
+                //si hay errores
+                $datos = [
+                "titulo" => "Cambia clave de acceso", 
+                "menu" => false,
+                "errores" => $errores,
+                "data" => $data
+                ];
+                $this->vista("loginCambiaClave", $datos);
+            } else {
+                //No hay errores
+                if ($this->modelo->cambiarClaveAcceso($id, $clave1)) {
+                    $datos = [
+                    "titulo" => "Modificar clave de acceso",
+                    "menu" => false,
+                    "errores" => [],
+                    "data" => [],
+                    "subtitulo" => "Modificar clave de acceso",
+                    "texto" => "La modificación de la clave de acceso fue exitosa. Bienvenido nuevamente.",
+                    "color" => "alert-success",
+                    "url" => "login", //regresamos a login
+                    "colorBoton" => "btn-success",
+                    "textoBoton" => "Regresar"
+                    ];
+                    $this->vista("mensajeVista",$datos);
+                } else {
+                    $datos = [
+                    "titulo" => "Error al modificar la clave de acceso",
+                    "menu" => false,
+                    "errores" => [],
+                    "data" => [],
+                    "subtitulo" => "Error al modificar la clave de acceso",
+                    "texto" => "Existió un error al modificar la clave de acceso.",
+                    "color" => "alert-danger",
+                    "url" => "login", //regresamos a login
+                    "colorBoton" => "btn-danger",
+                    "textoBoton" => "Regresar"
+                    ];
+                    $this->vista("mensajeVista",$datos);
+                }
+            }
+        } else {
+            $datos = [
+            "titulo" => "Cambia clave de acceso", 
+            "menu" => false,
+            "data" => $data
+            ];
+            $this->vista("loginCambiaClave", $datos);
+        }
+        
+    }
+
+    function verifica(){
+        $errores = array();
+        if ($_SERVER["REQUEST_METHOD"]=="POST") {
+            $usuario = isset($_POST["usuario"])?$_POST["usuario"]:"";
+            $clave = isset($_POST["clave"])?$_POST["clave"]:"";
+            $recordar = isset($_POST["recordar"])?"on":"off";
+            $errores = $this->modelo->verificar($usuario, $clave);
+            //
+            $data = [
+                "usuario" => $usuario,
+                "clave" => $clave,
+                "recordar" => $recordar
+            ];
+            if (empty($errores)) {
+                header("location:".RUTA."tienda");
+            } else {
+                $datos = ["titulo" => "Login", "menu" =>false, "errores" => $errores, "data" => $data];
+                $this->vista("loginVista", $datos);
+            }
+            
+        }
+    }
+
 }
 
 ?>
