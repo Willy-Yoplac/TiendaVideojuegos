@@ -20,7 +20,7 @@ crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Yoplac&Gallardo</a> 
+        <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Zona-Games</a> 
         <?php if ($datos["menu"]){
             #menu
         }
