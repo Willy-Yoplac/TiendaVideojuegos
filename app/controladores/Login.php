@@ -136,19 +136,19 @@ class Login extends Controlador {
                 array_push($errores, "La clave de acceso es requerida");
             }
             if ($clave2==""){
-                array_push($errores, "La clave de verificacion de acceso es requerida");
+                array_push($errores, "La clave de verificación de acceso es requerida");
             }
             if ($ciudad==""){
                 array_push($errores, "La ciudad es requerida");
             }
             if ($pais==""){
-                array_push($errores, "El país es requerida");
+                array_push($errores, "El país es requerido");
             }
             if ($clave1!=$clave2){
-                array_push($errores, "Las claves de acceso no coinsiden");
+                array_push($errores, "Las claves de acceso no coinciden");
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($errores, "El email electronico no es valido");
+                array_push($errores, "El correo electronico no es válido");
             }
             if (count($errores)==0){
         
