@@ -1,7 +1,7 @@
 <?php include_once("encabezado.php");   ?>
-            <h1 class="text-center">Inicio de sesión</h1>
-            <div class="card p-4 bg-light"> <!--pading 4 bakgrou-->
-    <form action="<?php print RUTA; ?>login/verifica/" method="POST">
+<h1 class="text-center">Módulo Administrativo</h1>
+<div class="card p-4 bg-light">
+    <form action="<?php print RUTA; ?>admin/verifica/" method="POST">
      <div class="form-group text-left"> 
         <label for="usuario"> Usuario: </label>
         <input type="text" name="usuario" class="form-control"
@@ -24,16 +24,7 @@
      <div>
         <input type="submit" value="Enviar" class="btn btn-success"></td>
      </div><br>
-     <div>
-        <input type="checkbox" name="recordar"
-        <?php
-        if(isset($datos['data']['recordar'])){
-            if($datos['data']['recordar']=="on") print "checked";
-        }
-        ?>
-            <label for="recordar">Recordar</label>  
+     <div> 
     </form>
     </div> <!--para crear un cuadro-->
-    <a href="<?php print RUTA; ?>login/registro/" >¿No tienes una cuenta? Regístrate</a><br><br>
-    <a href="<?php print RUTA; ?>login/olvido/" >¿Olvide mi clave de acceso?</a>
 <?php include_once("piepagina.php");   ?>

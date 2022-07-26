@@ -20,11 +20,22 @@ crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Zona-Games</a> 
+        <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Zona-Games</a>
+        <div class="collapse navbar-collapse" id="menu">
         <?php if ($datos["menu"]){
             #menu
         }
+        if(isset($datos["admin"])){
+            if($datos["admin"]){
+                print "<ul class='navbar-nav mr-auto mt-2 mt-lg-0'>";
+                print "<li class='nav-item'>";
+                print "<a href='".RUTA."adminUsuarios' class='nav-link'>Usuarios</a>";
+                print "</li>";
+                print "</ul>";
+            }
+        }
         ?>
+    </div>
     </nav>
     <div class="Container-fluid">
         <div class="row content">
