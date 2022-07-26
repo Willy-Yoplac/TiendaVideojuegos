@@ -6,31 +6,30 @@
  */
 class Control{
     protected $controlador = "Login";
-       //solo puede ver la clase o las heredadas
+    //solo puede ver la clase o las heredadas
     protected $metodo = "caratula";
     protected $parametros = []; 
+
     //__metodos magicos
     function __construct(){
-
        $url = $this->separarURL();
 
        if($url != "" && file_exists("../app/controladores/".ucwords($url[0]).".php")){
         $this->controlador =ucwords($url[0]);
-        unset($url[0]);
-        
+        unset($url[0]);       
        }
        //Cargando la clase controlador
        require_once("../app/controladores/".ucwords($this->controlador).".php");
-       //Instanciando la clase controldor
+      //Instanciamo la clase del controlador
        $this->controlador = new $this->controlador;
        
-
        if(isset($url[1])){
         if(method_exists($this->controlador, $url[1])){
             $this->metodo = $url[1];
             unset($url[1]);
         }
        }
+       //si E arreglo, lo tomamos y si no tomamos uno vacio
        $this->parametros = $url ? array_values($url):[];
 
        call_user_func_array([$this->controlador, $this->metodo],

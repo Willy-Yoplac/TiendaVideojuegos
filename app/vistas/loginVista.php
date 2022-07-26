@@ -8,8 +8,7 @@
         placeholder="Escribe tu correo electrónico"
         value="<?php 
         print isset($datos['data']['usuario'])?$datos['data']['usuario']:''; 
-        ?>"
-        >
+        ?>" >
      </div>
      <div class="form-group text-left">
         <label for="clave"> Clave acceso: </label>
@@ -19,8 +18,7 @@
         print isset($datos['data']['clave'])?$datos['data']['clave']:''; 
         ?>"
         >
-     </div class="form-group text-left"><br>
-     
+     </div class="form-group text-left"><br>  
      <div>
         <input type="submit" value="Enviar" class="btn btn-success"></td>
      </div><br>
@@ -34,6 +32,6 @@
             <label for="recordar">Recordar</label>  
     </form>
     </div> <!--para crear un cuadro-->
-    <a href="<?php print RUTA; ?>login/registro/" >Darse de alta en el sistema</a><br><br>
+    <a href="<?php print RUTA; ?>login/registro/" >Registrarse</a><br>
     <a href="<?php print RUTA; ?>login/olvido/" >¿Olvide mi clave de acceso?</a>
 <?php include_once("piepagina.php");   ?>

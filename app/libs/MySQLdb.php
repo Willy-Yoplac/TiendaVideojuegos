@@ -7,7 +7,7 @@ class MySQLdb {
     private $usuario = "root";
     private $clave = "";
     private $db = "clientes_videojuegos"; 
-    private $puerto = ""; //Creo que no VOY A NECESITAR
+    
     private $conn; // coneccion
 
     function __construct(){
@@ -24,11 +24,11 @@ class MySQLdb {
         }else{
            // print "Conexion exitosa con la Base de Datos"."<br>";
         }
-        //Opcional
+       
         if (!mysqli_set_charset($this->conn, "utf8")){
-            printf("Error en la conexion a la base de datos %s",
+            printf("Error en el camio de caracteres %s",
             mysqli_connect_error());
-            die(); // = exit
+            die(); // o exit
 
         }else{
            // print "El conjunto de caracteres es: ".mysqli_character_set_name($this->conn)."<br>";

@@ -7,7 +7,6 @@ class LoginModelo{
     function __construct(){
         $this->db = new MySQLdb();
     }
-
     function insertarRegistro($data){
         $r = false;
         if ($this->validaCorreo($data["email"])) {

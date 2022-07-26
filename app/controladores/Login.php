@@ -160,7 +160,7 @@ class Login extends Controlador {
                     "errores" => [],
                     "data" => [],
                     "subtitulo" => "Bienvenid@ a nuestra tienda ZONA-GAMES",
-                    "texto" => "En nombre de nuestra empresa te damos 
+                    "texto" => "En nombre de nuestro proyecto te damos 
                     la más sincera bienvenida a nuestra tienda virtual, 
                     en la que esperamos encontrarán todo lo que 
                     necesitas.<br><br>El objetivo principal de este 
@@ -169,11 +169,11 @@ class Login extends Controlador {
                      la voluntad de servicio, así como nuestro interés por 
                      todas aquellas ventajas que nos ofrece la tecnología. 
                      Todo ello tiene una presencia destacada en esta página web y 
-                     en nuestras propias decisiones.<br><br>El 18 de junio 
+                     en nuestras propias decisiones.<br><br>El 18 de junio del 2022 
                      comenzó una idea tan sencilla y a la vez tan responsable de
                      crear esta tienda.<br><br>Sólo nos queda desearles un agradable 
                       experiencia en nuestra tienda.<br><br>Atentamente: 
-                      Willy Yoplac, CEO",
+                      Willy Yoplac, CEO.",
                     "color" => "alert-success",
                     "url" => "menu",
                     "colorBoton" => "btn-success",
