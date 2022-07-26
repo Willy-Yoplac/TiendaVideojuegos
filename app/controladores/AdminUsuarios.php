@@ -25,6 +25,7 @@ class AdminUsuarios extends Controlador{
   {
     if ($_SERVER['REQUEST_METHOD']=="POST") {
       $errores = array();
+	  $data = array();
       $usuario = isset($_POST['usuario'])?$_POST['usuario']:"";
       $clave1 = isset($_POST['clave1'])?$_POST['clave1']:"";
       $clave2 = isset($_POST['clave2'])?$_POST['clave2']:"";
@@ -45,21 +46,28 @@ class AdminUsuarios extends Controlador{
       if(empty($nombre)){
         array_push($errores,"El nombre del usuario es requerido.");
       }
+	  // Arreglo de datos
+	  $data = [
+		"nombre" => $nombre,
+		"clave1" => $clave1,
+		"clave2" => $clave2,
+		"usuario" => $usuario
+	  ];
       //Si no hay errores
       if (empty($errores)) {
-        # code...
+        if($this->modelo->insertarDatos($data)){
+
+		}else{
+
+		}
       } else {
         $datos = [
         "titulo" => "Administrativo Usuarios Alta",
         "menu" => false,
         "admon" => true,
         "errores" => $errores,
-        "data" => [
-          "nombre" => $nombre,
-          "clave1" => $clave1,
-          "clave2" => $clave2,
-          "usuario" => $usuario
-        ]
+		"data" => $data
+        
       ];
       $this->vista("adminUsuariosVista",$datos);
       }
