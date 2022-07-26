@@ -3,18 +3,18 @@
 <div class="card p-4 bg-light">
     <form action="<?php print RUTA; ?>adminUsuarios/alta/" method="POST">
      <div class="form-group text-left"> 
-        <label for="usuario"> Usuario: </label>
-        <input type="text" name="usuario" class="form-control"
-        placeholder="Escribe tu correo electrónico"
+        <label for="usuario">* Usuario: </label>
+        <input type="email" name="usuario" class="form-control"
+        placeholder="Escribe tu correo electrónico" required
         value="<?php 
         print isset($datos['data']['usuario'])?$datos['data']['usuario']:''; 
         ?>"
         >
      </div>
      <div class="form-group text-left">
-        <label for="clave1"> Clave de acceso: </label>
+        <label for="clave1">* Clave de acceso: </label>
         <input type="password" name="clave1" class="form-control"
-        placeholder="Escribe tu clave de acceso (sin espacios en blanco)"
+        placeholder="Escribe tu clave de acceso (sin espacios en blanco)" required
         value="<?php 
         print isset($datos['data']['clave1'])?$datos['data']['clave1']:''; 
         ?>"
@@ -30,9 +30,9 @@
         >
      </div>
      <div class="form-group text-left"> 
-        <label for="nombre"> Nombre: </label>
+        <label for="nombre">* Nombre: </label>
         <input type="text" name="nombre" class="form-control"
-        placeholder="Escribe tu nombre"
+        placeholder="Escribe tu nombre" required
         value="<?php 
         print isset($datos['data']['nombre'])?$datos['data']['nombre']:''; 
         ?>"
