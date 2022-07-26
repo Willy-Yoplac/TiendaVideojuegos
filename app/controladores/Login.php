@@ -136,19 +136,19 @@ class Login extends Controlador {
                 array_push($errores, "La clave de acceso es requerida");
             }
             if ($clave2==""){
-                array_push($errores, "La clave de verificacion de acceso es requerida");
+                array_push($errores, "La clave de verificación de acceso es requerida");
             }
             if ($ciudad==""){
                 array_push($errores, "La ciudad es requerida");
             }
             if ($pais==""){
-                array_push($errores, "El país es requerida");
+                array_push($errores, "El país es requerido");
             }
             if ($clave1!=$clave2){
-                array_push($errores, "Las claves de acceso no coinsiden");
+                array_push($errores, "Las claves de acceso no coinciden");
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($errores, "El email electronico no es valido");
+                array_push($errores, "El correo electronico no es válido");
             }
             if (count($errores)==0){
         
@@ -169,11 +169,11 @@ class Login extends Controlador {
                      la voluntad de servicio, así como nuestro interés por 
                      todas aquellas ventajas que nos ofrece la tecnología. 
                      Todo ello tiene una presencia destacada en esta página web y 
-                     en nuestras propias decisiones.<br><br>El 18 de junio del 2022 
+                     en nuestras propias decisiones.<br><br>El 18 de junio de 2022 
                      comenzó una idea tan sencilla y a la vez tan responsable de
                      crear esta tienda.<br><br>Sólo nos queda desearles un agradable 
                       experiencia en nuestra tienda.<br><br>Atentamente: 
-                      Willy Yoplac, CEO.",
+                     Yoplac-Gallardo, Desarrolladores de la página web.",
                     "color" => "alert-success",
                     "url" => "menu",
                     "colorBoton" => "btn-success",
