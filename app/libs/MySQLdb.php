@@ -49,6 +49,17 @@ class MySQLdb {
       return $data;
     }
 
+    function querySelect($sql){
+        $data = array();
+        $r = mysqli_query($this->conn, $sql);
+        if($r){
+            while($row = mysqli_fetch_assoc($r)){
+                array_push($data, $row);
+            }
+        }
+      return $data;
+    }
+
     //Query regresa un valor voleano
     function queryNoSelect ($sql){
         

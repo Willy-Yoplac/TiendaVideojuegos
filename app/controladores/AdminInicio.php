@@ -9,14 +9,19 @@ class AdminInicio extends Controlador {
     }
 
     function caratula(){
-    	
-    	$datos = ["titulo" => "Administrativo ^ Inicio",
-		"menu"=>false,
-		"admin" =>true,
-		"data" => []
-	];
-        $this->vista("AdminInicioVista", $datos);   	   	
-         
+        //Creamos sesion
+        $sesion = new Sesion();
+
+        if($sesion->getLogin()){
+           $datos = ["titulo" => "Administrativo | Inicio",
+            "menu"=>false,
+            "admin" =>true,
+            "data" => []
+        ];
+        $this->vista("AdminInicioVista", $datos); 
+        }else{
+            header("location:".RUTA."admin");
+        }
     }
 }
 

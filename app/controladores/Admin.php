@@ -48,6 +48,10 @@ class Admin extends Controlador{
 
 				//NO hay errores
 				if(empty($errores)){
+					//creamos la sesion
+					$sesion = new Sesion();
+					$sesion->iniciarLogin($data);
+					//Abrimos adminInicio
 					header("location:".RUTA."adminInicio");
        
 				}
