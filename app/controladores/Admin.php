@@ -22,13 +22,49 @@ class Admin extends Controlador{
 
 	public function verifica()
 	{
-		$datos = [
-			"titulo" => "Administrativo Inicio",
+		//Inicio de arreglos
+		$errores = array();
+		$data = array();
+		//Recibimos los datos de la vista
+		if($_SERVER['REQUEST_METHOD']=="POST"){
+			
+			$usuario = isset($_POST['usuario'])?$_POST['usuario']:"";
+			$clave = isset($_POST['clave'])?$_POST['clave']:"";
+			//Validaciones
+			if(empty($usuario)){
+				array_push($errores, "El usuario es requerido.");
+			}
+			if(empty($clave)){
+				array_push($errores, "La clave es requerida.");
+			}
+			//arreglo de data
+			$data = ["usuario" => $usuario, "clave" => $clave];
+			
+			// Verificar errores
+			if(empty($errores)){
+
+				//Ejecuta query
+				$errores = $this->modelo->verificarClave($data);
+
+				//NO hay errores
+				if(empty($errores)){
+					header("location:".RUTA."adminInicio");
+       
+				}
+
+			}
+
+	}
+	// Enviamos errores a la vista
+	$datos = [
+			"titulo" => "Administrativo",
 			"menu" => false,
 			"admin" => true,
+			"errores" => $errores,
 			"data" => []
 		];
-		$this->vista("adminInicioVista",$datos);
+		$this->vista("adminVista",$datos);	
+		
 	}
 }
 

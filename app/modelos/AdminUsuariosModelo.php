@@ -19,8 +19,6 @@ class AdminUsuariosModelo{
 		$sql.="1, ";
 		$sql.="(NOW())) ";
 
-
-		
 		return $this->db->queryNoSelect($sql);
 	}
 }
