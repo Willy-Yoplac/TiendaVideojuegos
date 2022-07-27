@@ -56,8 +56,23 @@ class AdminUsuarios extends Controlador{
       //Si no hay errores
       if (empty($errores)) {
         if($this->modelo->insertarDatos($data)){
+          header("location:".RUTA."adminUsuarios");
 
 		}else{
+      $datos = [
+        "titulo" => "Error en el registro",
+        "menu" => false,
+        "errores" => [],
+        "data" => [],
+        "subtitulo" => "Error en la incercion del registro",
+        "texto" => "Existió en la incercion del registro, 
+        vuelva a intentarlo",
+        "color" => "alert-danger",
+        "url" => "adminInicio", //regresamos a login
+        "colorBoton" => "btn-danger",
+        "textoBoton" => "Regresar"
+        ];
+        $this->vista("mensajeVista",$datos);
 
 		}
       } else {

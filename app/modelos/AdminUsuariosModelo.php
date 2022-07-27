@@ -18,9 +18,10 @@ class AdminUsuariosModelo{
 		$sql.="'".$clave."', ";
 		$sql.="1, ";
 		$sql.="(NOW())) ";
-		print_r($sql);
 
-		
+
+
+
 		return $this->db->queryNoSelect($sql);
 	}
 }
