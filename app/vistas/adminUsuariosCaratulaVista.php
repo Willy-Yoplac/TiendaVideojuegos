@@ -6,7 +6,7 @@
 		<th>id</th>
 		<th>Nombre</th>
 		<th>Correo</th>
-		<th>Modifica</th>
+		<th>Modificar</th>
 		<th>Borrar</th>
 	</thead>
 	<tbody>

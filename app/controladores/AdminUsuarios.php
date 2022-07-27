@@ -114,45 +114,52 @@ class AdminUsuarios extends Controlador{
 		print "Usuarios admin baja";
 	}
     //actualizar
-	public function cambio($idAdmin)
+	public function cambio($idAdmin="")
 	{
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
       $errores = array();
       $data = array();
-      $usuario = isset($_POST['usuario'])?$_POST['usuario']:"";
+      $idAdmin = isset($_POST['idAdmin'])?$_POST['idAdmin']:"";
+      $correo = isset($_POST['correo'])?$_POST['correo']:"";
       $clave1 = isset($_POST['clave1'])?$_POST['clave1']:"";
       $clave2 = isset($_POST['clave2'])?$_POST['clave2']:"";
       $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
+      $status = isset($_POST['status'])?$_POST['status']:"";
       //Validacion
-      if(empty($usuario)){
-        array_push($errores,"El usuario es requerido.");
-      }
-      if(empty($clave1)){
-        array_push($errores,"La clave de acceso es requerida.");
-      }
-      if(empty($clave2)){
-        array_push($errores,"La verificación de la clave de acceso es requerida.");
-      }
-      if($clave1!=$clave2){
-        array_push($errores,"Las claves deben coincidir.");
+      if(empty($correo)){
+        array_push($errores,"El correo del usuario es requerido.");
       }
       if(empty($nombre)){
         array_push($errores,"El nombre del usuario es requerido.");
       }
+      if($status=="void"){
+        array_push($errores,"Selecciona el estado del usuario.");
+      }
+      if(!empty($clave1) && !empty($clave2)){
+        if($clave1 != $clave2){
+          array_push($errores,"Las claves no coinciden.");
+        }
+      }
 
         // Arreglo de datos
         $data = [
+        "idAdmin" => $idAdmin,
         "nombre" => $nombre,
         "clave1" => $clave1,
         "clave2" => $clave2,
-        "usuario" => $usuario
+        "status" => $status,
+        "correo" => $correo
         ];
+       //var_dump($data);
+        $errores = $this->modelo->modificaUsuario($data);
     }else{
       $data = $this->modelo->getUsuarioId($idAdmin);
+      $llaves = $this->modelo->getLlaves("adminStatus");
       $datos = [
         "titulo" => "Administrativo Usuarios Modifica",
         "menu" => false,
         "admin" => true,
+        "status" => $llaves,
         "data" => $data
       ];
       $this->vista("adminUsuariosModificaVista",$datos);

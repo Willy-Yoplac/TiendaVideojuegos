@@ -11,7 +11,7 @@ class AdminUsuariosModelo{
 	}
 	public function insertarDatos($data)
 	{ 
-		$clave = hash_hmac("sha512", $data["clave1"], "mimamamemima");
+		$clave = hash_hmac("sha512", $data["clave1"], LLAVE);
 		$sql = "INSERT INTO administrativos VALUES(0,";
 		$sql.="'".$data["nombre"]."', ";
 		$sql.="'".$data["usuario"]."', ";
@@ -27,10 +27,31 @@ class AdminUsuariosModelo{
 		return $data;
 	}
 
+	public function getLlaves($tipo){
+		$sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'ORDER BY indice DESC";
+		$data = $this->db->querySelect($sql);
+		return $data;
+	}
+
 	public function getUsuarioId($idAdmin){
 		$sql = "SELECT * FROM administrativos WHERE idAdmin=".$idAdmin;
 		$data = $this->db->query($sql);
 		return $data;
+	}
+
+	public function modificaUsuario($data){
+		$errores = array();
+		$sql = "UPDATE administrativos SET ";
+		$sql.= "correo='".$data["correo"]."', ";
+		$sql.= "nombre='".$data["nombre"]."', ";
+		$sql.= "status=".$data["status"];
+		if(!empty($data['clave1'] && !empty($data['clave2']))){
+			$clave = hash_hmac("sha512", $data["clave1"], LLAVE);
+			$sql.= ", clave='".$clave."'";
+		}
+		$sql.= " WHERE idAdmin=".$data["idAdmin"];
+		print $sql;
+		return $errores;
 	}
 }
 ?>
