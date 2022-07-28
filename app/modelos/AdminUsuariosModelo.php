@@ -44,13 +44,15 @@ class AdminUsuariosModelo{
 		$sql = "UPDATE administrativos SET ";
 		$sql.= "correo='".$data["correo"]."', ";
 		$sql.= "nombre='".$data["nombre"]."', ";
-		$sql.= "status=".$data["status"];
+		$sql.= "estado=".$data["estado"];
 		if(!empty($data['clave1'] && !empty($data['clave2']))){
 			$clave = hash_hmac("sha512", $data["clave1"], LLAVE);
 			$sql.= ", clave='".$clave."'";
 		}
 		$sql.= " WHERE idAdmin=".$data["idAdmin"];
-		print $sql;
+		if(!$this->db->queryNoSelect($sql)){
+			array_push($errores,"Existió un error al actualizar el registro.");
+		}
 		return $errores;
 	}
 }
