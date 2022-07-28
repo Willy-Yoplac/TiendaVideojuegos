@@ -42,7 +42,7 @@
             <?php
             for ($i=0; $i < count($datos["status"]); $i++) { 
                 print "<option value='".$datos["status"][$i]["indice"]."'";
-                if($datos["status"][$i]["indice"]==$datos["data"]){
+                if($datos["status"][$i]["indice"]==$datos["data"]["status"]){
                     print " selected ";
                 }
                 print ">".$datos["status"][$i]["cadena"]."</option>";

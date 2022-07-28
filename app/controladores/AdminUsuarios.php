@@ -109,13 +109,22 @@ class AdminUsuarios extends Controlador{
 	
   }
     //eliminar
-	public function baja($idAdmin)
+	public function baja($idAdmin="")
 	{//Definiendo los arreglos
     $errores = array();
     $data = array();
 
     // Recibiendo datos de la vista
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
+      $idAdmin = isset($_POST['idAdmin'])?$_POST['idAdmin']:"";
+      if(!empty($idAdmin)){
+        $errores = $this->modelo->bajaLogica($idAdmin);
+        //Si no hay errores regresamos
+        if(empty($errores)){
+          header("location:".RUTA."adminUsuarios");
+          
+        }
+      }
 
     }
     $data = $this->modelo->getUsuarioId($idAdmin);
@@ -129,8 +138,7 @@ class AdminUsuarios extends Controlador{
       "errores" => $errores,
       "data" => $data
     ];
-    //print_r($llaves);
-    print_r($datos);
+    
     
   $this->vista("adminUsuariosBorraVista",$datos);
 	}
