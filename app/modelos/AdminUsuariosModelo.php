@@ -22,7 +22,7 @@ class AdminUsuariosModelo{
 	}
 
 	public function getUsuarios(){
-		$sql = "SELECT * FROM administrativos WHERE estado=1";
+		$sql = "SELECT * FROM administrativos WHERE status=1";
 		$data = $this->db->querySelect($sql);
 		return $data;
 	}
@@ -31,6 +31,7 @@ class AdminUsuariosModelo{
 		$sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'ORDER BY indice DESC";
 		$data = $this->db->querySelect($sql);
 		return $data;
+		
 	}
 
 	public function getUsuarioId($idAdmin){
@@ -44,7 +45,7 @@ class AdminUsuariosModelo{
 		$sql = "UPDATE administrativos SET ";
 		$sql.= "correo='".$data["correo"]."', ";
 		$sql.= "nombre='".$data["nombre"]."', ";
-		$sql.= "estado=".$data["status"];
+		$sql.= "status=".$data["status"];
 		if(!empty($data['clave1'] && !empty($data['clave2']))){
 			$clave = hash_hmac("sha512", $data["clave1"], LLAVE);
 			$sql.= ", clave='".$clave."'";

@@ -129,6 +129,8 @@ class AdminUsuarios extends Controlador{
       "errores" => $errores,
       "data" => $data
     ];
+    //print_r($llaves);
+    print_r($datos);
     
   $this->vista("adminUsuariosBorraVista",$datos);
 	}
