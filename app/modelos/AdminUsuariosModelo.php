@@ -45,7 +45,7 @@ class AdminUsuariosModelo{
 		$sql = "UPDATE administrativos SET ";
 		$sql.= "correo='".$data["correo"]."', ";
 		$sql.= "nombre='".$data["nombre"]."', ";
-		$sql.= "estado=".$data["estado"];
+		$sql.= "status=".$data["status"];
 		if(!empty($data['clave1'] && !empty($data['clave2']))){
 			$clave = hash_hmac("sha512", $data["clave1"], LLAVE);
 			$sql.= ", clave='".$clave."'";

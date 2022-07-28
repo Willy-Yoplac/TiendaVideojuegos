@@ -36,16 +36,16 @@
      </div>
 
      <div class="form-group">
-        <label for="estado">Selecciona un estado</label>
-        <select class="form-control" name="estado" id="estado">
-            <option value="void">Selecciona el estado del usuario</option>
+        <label for="status">Selecciona un status</label>
+        <select class="form-control" name="status" id="status">
+            <option value="void">Selecciona el status del usuario</option>
             <?php
-            for ($i=0; $i < count($datos["estado"]); $i++) { 
-                print "<option value='".$datos["estado"][$i]["indice"]."'";
-                if($datos["estado"][$i]["indice"]==$datos["data"]["estado"]){
+            for ($i=0; $i < count($datos["status"]); $i++) { 
+                print "<option value='".$datos["status"][$i]["indice"]."'";
+                if($datos["status"][$i]["indice"]==$datos["data"]["status"]){
                     print " selected ";
                 }
-                print ">".$datos["estado"][$i]["cadena"]."</option>";
+                print ">".$datos["status"][$i]["cadena"]."</option>";
             }
             ?>
         </select>

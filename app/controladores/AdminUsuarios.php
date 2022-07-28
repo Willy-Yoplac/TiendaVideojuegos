@@ -109,14 +109,14 @@ class AdminUsuarios extends Controlador{
 	
   }
     //eliminar
-	public function baja($idAdmin)
+	public function baja($idAdmin="")
 	{//Definiendo los arreglos
     $errores = array();
     $data = array();
 
     // Recibiendo datos de la vista
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
-
+       
     }
     $data = $this->modelo->getUsuarioId($idAdmin);
     $llaves = $this->modelo->getLlaves("adminStatus");
@@ -130,7 +130,7 @@ class AdminUsuarios extends Controlador{
       "data" => $data
     ];
     //print_r($llaves);
-    print_r($datos);
+    //print_r($datos);
     
   $this->vista("adminUsuariosBorraVista",$datos);
 	}
@@ -149,7 +149,7 @@ class AdminUsuarios extends Controlador{
       $clave1 = isset($_POST['clave1'])?$_POST['clave1']:"";
       $clave2 = isset($_POST['clave2'])?$_POST['clave2']:"";
       $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
-      $estado = isset($_POST['estado'])?$_POST['estado']:"";
+      $status = isset($_POST['status'])?$_POST['status']:"";
       //Validacion
       if(empty($correo)){
         array_push($errores,"El correo del usuario es requerido.");
@@ -157,12 +157,12 @@ class AdminUsuarios extends Controlador{
       if(empty($nombre)){
         array_push($errores,"El nombre del usuario es requerido.");
       }
-      if($estado=="void"){
-        array_push($errores,"Selecciona el estado del usuario.");
+      if($status=="void"){
+        array_push($errores,"Selecciona el status del usuario.");
       }
       if(!empty($clave1) && !empty($clave2)){
         if($clave1 != $clave2){
-          array_push($errores,"Los valores no coinciden.");
+          array_push($errores,"Las claves no coinciden.");
         }
       }
       
@@ -174,7 +174,7 @@ class AdminUsuarios extends Controlador{
         "nombre" => $nombre,
         "clave1" => $clave1,
         "clave2" => $clave2,
-        "estado" => $estado,
+        "status" => $status,
         "correo" => $correo
         ];
        // Mandamos al modelo
