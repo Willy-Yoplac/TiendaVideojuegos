@@ -116,9 +116,13 @@ class AdminUsuarios extends Controlador{
     //actualizar
 	public function cambio($idAdmin="")
 	{
+    //Definiendo los arreglos
+    $errores = array();
+    $data = array();
+
+    // Recibiendo datos de la vista
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
-      $errores = array();
-      $data = array();
+      
       $idAdmin = isset($_POST['idAdmin'])?$_POST['idAdmin']:"";
       $correo = isset($_POST['correo'])?$_POST['correo']:"";
       $clave1 = isset($_POST['clave1'])?$_POST['clave1']:"";
@@ -137,10 +141,12 @@ class AdminUsuarios extends Controlador{
       }
       if(!empty($clave1) && !empty($clave2)){
         if($clave1 != $clave2){
-          array_push($errores,"Las claves no coinciden.");
+          array_push($errores,"Los valores no coinciden.");
         }
       }
-
+      
+      if(empty($errores)){
+     
         // Arreglo de datos
         $data = [
         "idAdmin" => $idAdmin,
@@ -150,9 +156,18 @@ class AdminUsuarios extends Controlador{
         "status" => $status,
         "correo" => $correo
         ];
-       //var_dump($data);
+       // Mandamos al modelo
         $errores = $this->modelo->modificaUsuario($data);
-    }else{
+
+        //Validacion de la modificacion de datos
+        
+        if(empty($errores)){
+          header("location:".RUTA."adminUsuarios");
+          
+        }
+           
+      }
+    }
       $data = $this->modelo->getUsuarioId($idAdmin);
       $llaves = $this->modelo->getLlaves("adminStatus");
       $datos = [
@@ -160,10 +175,11 @@ class AdminUsuarios extends Controlador{
         "menu" => false,
         "admin" => true,
         "status" => $llaves,
+        "errores" => $errores,
         "data" => $data
       ];
       $this->vista("adminUsuariosModificaVista",$datos);
-    }
+    
 	}
 }
 
