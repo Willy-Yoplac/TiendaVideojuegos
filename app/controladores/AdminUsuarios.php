@@ -109,9 +109,28 @@ class AdminUsuarios extends Controlador{
 	
   }
     //eliminar
-	public function baja()
-	{
-		print "Usuarios admin baja";
+	public function baja($idAdmin)
+	{//Definiendo los arreglos
+    $errores = array();
+    $data = array();
+
+    // Recibiendo datos de la vista
+		if ($_SERVER['REQUEST_METHOD']=="POST") {
+
+    }
+    $data = $this->modelo->getUsuarioId($idAdmin);
+    $llaves = $this->modelo->getLlaves("adminStatus");
+    // Abrir la vista
+    $datos = [
+      "titulo" => "Administrativo Usuarios Eliminar",
+      "menu" => false,
+      "admin" => true,
+      "status" => $llaves,
+      "errores" => $errores,
+      "data" => $data
+    ];
+    
+  $this->vista("adminUsuariosBorraVista",$datos);
 	}
     //actualizar
 	public function cambio($idAdmin="")
