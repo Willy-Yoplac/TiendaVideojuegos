@@ -32,6 +32,6 @@
             <label for="recordar">Recordar</label>  
     </form>
     </div> <!--para crear un cuadro-->
-    <a href="<?php print RUTA; ?>login/registro/" >¿No tienes una cuenta? Regístrate</a><br><br>
+    <a href="<?php print RUTA; ?>login/registro/" >¿No tienes una cuenta? Regístrate</a><br>
     <a href="<?php print RUTA; ?>login/olvido/" >¿Olvide mi clave de acceso?</a>
 <?php include_once("piepagina.php");   ?>

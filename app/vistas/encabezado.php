@@ -31,6 +31,9 @@ crossorigin="anonymous"></script>
                 print "<li class='nav-item'>";
                 print "<a href='".RUTA."adminUsuarios' class='nav-link'>Usuarios</a>";
                 print "</li>";
+                print "<li class='nav-item'>";
+                print "<a href='".RUTA."adminProductos' class='nav-link'>Productos</a>";
+                print "</li>";
                 print "</ul>";
             }
         }
