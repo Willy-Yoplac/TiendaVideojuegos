@@ -22,7 +22,7 @@ class AdminUsuariosModelo{
 	}
 
 	public function getUsuarios(){
-		$sql = "SELECT * FROM administrativos WHERE estado=1";
+		$sql = "SELECT * FROM administrativos WHERE status=1";
 		$data = $this->db->querySelect($sql);
 		return $data;
 	}
@@ -31,6 +31,7 @@ class AdminUsuariosModelo{
 		$sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'ORDER BY indice DESC";
 		$data = $this->db->querySelect($sql);
 		return $data;
+		
 	}
 
 	public function getUsuarioId($idAdmin){
@@ -51,8 +52,9 @@ class AdminUsuariosModelo{
 		}
 		$sql.= " WHERE idAdmin=".$data["idAdmin"];
 		if(!$this->db->queryNoSelect($sql)){
-			array_push($errores,"Existió un error al actualizar el registro.");
+			array_push($errores, "Existio un error al actualizar el registro");
 		}
+		//print $sql;
 		return $errores;
 	}
 }

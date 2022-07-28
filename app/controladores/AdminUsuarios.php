@@ -109,19 +109,41 @@ class AdminUsuarios extends Controlador{
 	
   }
     //eliminar
-	public function baja()
-	{
-		print "Usuarios admin baja";
+	public function baja($idAdmin)
+	{//Definiendo los arreglos
+    $errores = array();
+    $data = array();
+
+    // Recibiendo datos de la vista
+		if ($_SERVER['REQUEST_METHOD']=="POST") {
+
+    }
+    $data = $this->modelo->getUsuarioId($idAdmin);
+    $llaves = $this->modelo->getLlaves("adminStatus");
+    // Abrir la vista
+    $datos = [
+      "titulo" => "Administrativo Usuarios Eliminar",
+      "menu" => false,
+      "admin" => true,
+      "status" => $llaves,
+      "errores" => $errores,
+      "data" => $data
+    ];
+    //print_r($llaves);
+    print_r($datos);
+    
+  $this->vista("adminUsuariosBorraVista",$datos);
 	}
     //actualizar
 	public function cambio($idAdmin="")
 	{
-    //Definiendo arreglos
+    //Definiendo los arreglos
     $errores = array();
     $data = array();
 
-    //Recibiendo de la vista
+    // Recibiendo datos de la vista
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
+      
       $idAdmin = isset($_POST['idAdmin'])?$_POST['idAdmin']:"";
       $correo = isset($_POST['correo'])?$_POST['correo']:"";
       $clave1 = isset($_POST['clave1'])?$_POST['clave1']:"";
@@ -140,12 +162,12 @@ class AdminUsuarios extends Controlador{
       }
       if(!empty($clave1) && !empty($clave2)){
         if($clave1 != $clave2){
-          array_push($errores,"Las valores no coinciden.");
+          array_push($errores,"Los valores no coinciden.");
         }
       }
-
+      
       if(empty($errores)){
-
+     
         // Arreglo de datos
         $data = [
         "idAdmin" => $idAdmin,
@@ -155,27 +177,30 @@ class AdminUsuarios extends Controlador{
         "estado" => $estado,
         "correo" => $correo
         ];
-        //Enviamos al modelo
+       // Mandamos al modelo
         $errores = $this->modelo->modificaUsuario($data);
 
-        //Validamos la modificación
+        //Validacion de la modificacion de datos
+        
         if(empty($errores)){
           header("location:".RUTA."adminUsuarios");
+          
         }
+           
       }
-
-    $data = $this->modelo->getUsuarioId($idAdmin);
-    $llaves = $this->modelo->getLlaves("adminStatus");
-    $datos = [
-      "titulo" => "Administrativo Usuarios Modifica",
-      "menu" => false,
-      "admin" => true,
-      "estado" => $llaves,
-      "errores" => $errores,
-      "data" => $data
-    ];
-    $this->vista("adminUsuariosModificaVista",$datos);
     }
+      $data = $this->modelo->getUsuarioId($idAdmin);
+      $llaves = $this->modelo->getLlaves("adminStatus");
+      $datos = [
+        "titulo" => "Administrativo Usuarios Modifica",
+        "menu" => false,
+        "admin" => true,
+        "status" => $llaves,
+        "errores" => $errores,
+        "data" => $data
+      ];
+      $this->vista("adminUsuariosModificaVista",$datos);
+    
 	}
 }
 
