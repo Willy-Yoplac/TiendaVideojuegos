@@ -19,7 +19,7 @@ class AdminModelo{
 		$clave = hash_hmac("sha512", $data["clave"], LLAVE);
 
 		//Enviamos el query
-		$sql = "SELECT idAdmin, clave FROM administrativos 
+		$sql = "SELECT idAdmin, clave,status FROM administrativos 
 		WHERE correo='".$data['usuario']."'";
         $data = $this ->db->query($sql);
 		
@@ -30,7 +30,10 @@ class AdminModelo{
 		}else if($clave != $data['clave']){
 			array_push($errores, "La clave de acceso no es correcta");
 		}
-		else if(count($data)>2){
+		else if( $data['status']==0){
+			array_push($errores, "El usuarios esta desactivado");
+		}
+		else if(count($data)>3){
 			array_push($errores, "El correo electronico esta duplicado");
 		}else{
 			//para probar

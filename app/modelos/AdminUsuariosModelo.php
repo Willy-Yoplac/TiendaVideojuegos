@@ -40,6 +40,16 @@ class AdminUsuariosModelo{
 		return $data;
 	}
 
+	public function bajaLogica($idAdmin){
+		$errores = array();
+		$sql = "UPDATE administrativos SET status=0 WHERE idAdmin=".$idAdmin;
+		print_r($sql);
+		if(!$this->db->queryNoSelect($sql)){
+			$array_push($errores, "Error al modificar el registro para  eliminar");
+		}
+		return $errores;
+	}
+
 	public function modificaUsuario($data){
 		$errores = array();
 		$sql = "UPDATE administrativos SET ";

@@ -116,7 +116,20 @@ class AdminUsuarios extends Controlador{
 
     // Recibiendo datos de la vista
 		if ($_SERVER['REQUEST_METHOD']=="POST") {
+<<<<<<< HEAD
        
+=======
+      $idAdmin = isset($_POST['idAdmin'])?$_POST['idAdmin']:"";
+      if(!empty($idAdmin)){
+        $errores = $this->modelo->bajaLogica($idAdmin);
+        //Si no hay errores regresamos
+        if(empty($errores)){
+          header("location:".RUTA."adminUsuarios");
+          
+        }
+      }
+
+>>>>>>> 3c5de24abf8c5c8d6653f127963c06bcb77cafc0
     }
     $data = $this->modelo->getUsuarioId($idAdmin);
     $llaves = $this->modelo->getLlaves("adminStatus");
@@ -129,8 +142,12 @@ class AdminUsuarios extends Controlador{
       "errores" => $errores,
       "data" => $data
     ];
+<<<<<<< HEAD
     //print_r($llaves);
     //print_r($datos);
+=======
+    
+>>>>>>> 3c5de24abf8c5c8d6653f127963c06bcb77cafc0
     
   $this->vista("adminUsuariosBorraVista",$datos);
 	}
