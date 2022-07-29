@@ -41,6 +41,12 @@ class AdminProductos extends Controlador{
         //Leemos las llaves de tipo producto  
       $llaves = $this->modelo->getLlaves("tipoProducto");
 
+        //Leemos los status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
+
+        //Leemos los status del Producto  
+        $catalogo = $this->modelo->getCatalogo();
+
        //Vista añadir producto
       $datos = [
         "titulo" => "Administrativo Productos Añadir",
@@ -48,6 +54,8 @@ class AdminProductos extends Controlador{
         "admin" => true,
         "errores" => $errores,
         "tipoProducto" => $llaves,
+        "statusProducto" => $statusProducto,
+        "catalogo" => $catalogo,
         "data" => $data
     ];
     $this->vista("adminProductosAltaVista",$datos);

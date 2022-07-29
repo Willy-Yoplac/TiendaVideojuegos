@@ -19,6 +19,14 @@ class AdminProductosModelo{
     return $data;
   }
 
+  public function getCatalogo(){
+    $sql = "SELECT idProducto, nombre, tipo FROM productos ";
+    $sql.= "WHERE baja=0 AND status=1 ";
+    $sql.= "Order by tipo, nombre ";
+    $data = $this->db->querySelect($sql);
+    return $data;
+  }
+
   public function getLlaves($tipo){
     $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; //eliminé-> "'ORDER BY indice DESC"
     $data = $this->db->querySelect($sql);
