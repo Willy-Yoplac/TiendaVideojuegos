@@ -20,7 +20,7 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."' ORDER BY indice DESC";
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; //eliminé-> "'ORDER BY indice DESC"
     $data = $this->db->querySelect($sql);
     return $data;
   }

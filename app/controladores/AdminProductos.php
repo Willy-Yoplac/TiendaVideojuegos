@@ -33,14 +33,22 @@ class AdminProductos extends Controlador{
         }
     }
     //REGISTRAR
-    public function alta()
-    {
-       //Vista Caratula
+    public function alta(){
+       //Definir los arreglos
+      $data = array();
+      $errores = array();
+
+        //Leemos las llaves de tipo producto  
+      $llaves = $this->modelo->getLlaves("tipoProducto");
+
+       //Vista añadir producto
       $datos = [
         "titulo" => "Administrativo Productos Añadir",
         "menu" => false,
         "admin" => true,
-        "data" => []
+        "errores" => $errores,
+        "tipoProducto" => $llaves,
+        "data" => $data
     ];
     $this->vista("adminProductosAltaVista",$datos);
     }

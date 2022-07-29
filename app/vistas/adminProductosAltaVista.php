@@ -3,41 +3,106 @@
 <div class="card p-4 bg-light">
     <form action="<?php print RUTA; ?>adminProsuctos/alta/" method="POST">
      <div class="form-group text-left"> 
-        <label for="usuario">* Usuario: </label>
-        <input type="email" name="usuario" class="form-control"
-        placeholder="Escribe tu correo electrónico" required
-        value="<?php 
-        print isset($datos['data']['usuario'])?$datos['data']['usuario']:''; 
-        ?>"
-        >
+        <label for="usuario">* Tipo del producto: </label>
+        <select class="form-control" name="tipo" id="tipo">
+            <option value="void">Selecciona el tipo de producto</option>
+            <?php
+                for ($i=0; $i < count($datos["tipoProducto"]); $i++) { 
+                   print "<option value='".$datos["tipoProducto"][$i]["indice"]."'";
+                   print ">".$datos["tipoProducto"][$i]["cadena"]."</option>";
+                }
+            ?>
+        </select>
      </div>
      <div class="form-group text-left">
-        <label for="clave1">* Clave de acceso: </label>
-        <input type="password" name="clave1" class="form-control"
-        placeholder="Escribe tu clave de acceso (sin espacios en blanco)" required
-        value="<?php 
-        print isset($datos['data']['clave1'])?$datos['data']['clave1']:''; 
-        ?>"
-        >
-     </div>
-     <div class="form-group text-left">
-        <label for="clave2"> Verifica clave de acceso: </label>
-        <input type="password" name="clave2" class="form-control"
-        placeholder="Vuelve a escribir tu clave de acceso"
-        value="<?php 
-        print isset($datos['data']['clave2'])?$datos['data']['clave2']:''; 
-        ?>"
-        >
-     </div>
-     <div class="form-group text-left"> 
-        <label for="nombre">* Nombre: </label>
+        <label for="nombre">* Nombre del producto: </label>
         <input type="text" name="nombre" class="form-control"
-        placeholder="Escribe tu nombre" required
+        placeholder="Escribe el nombre del producto" required
         value="<?php 
         print isset($datos['data']['nombre'])?$datos['data']['nombre']:''; 
         ?>"
         >
      </div>
+     <div class="form-group text-left">
+        <label for="descripcion">* Descripción: </label>
+        <input type="text" name="descripcion" class="form-control"
+        placeholder="Escribe la descripción del producto" required
+        value="<?php 
+        print isset($datos['data']['descripcion'])?$datos['data']['descripcion']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left">
+        <label for="desarrolladora">* Desarrolladora: </label>
+        <input type="text" name="desarrolladora" class="form-control"
+        placeholder="Escribe la desarrolladora" required
+        value="<?php 
+        print isset($datos['data']['desarrolladora'])?$datos['data']['desarrolladora']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left">
+        <label for="editor">* Editor: </label>
+        <input type="text" name="editor" class="form-control"
+        placeholder="Escribe el editor" required
+        value="<?php 
+        print isset($datos['data']['editor'])?$datos['data']['editor']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="precio">* Precio del producto: </label>
+        <input type="text" name="precio" class="form-control"
+        pattern="^(\d|-)?(\d|,)*\.?\d*$"
+        placeholder="Escribe el precio del producto (sin comas ni símbolos)" required
+        value="<?php 
+        print isset($datos['data']['precio'])?$datos['data']['precio']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="descuento">Descuento del producto: </label>
+        <input type="text" name="descuento" class="form-control"
+        pattern="^(\d|-)?(\d|,)*\.?\d*$"
+        placeholder="Escribe el descuento del producto"
+        value="<?php 
+        print isset($datos['data']['descuento'])?$datos['data']['descuento']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="imagen">* Imagen del producto: </label>
+        <input type="file" name="imagen" class="form-control"
+        accept="imagen/jpeg" 
+        >
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="fecha_lanzamiento">* Fecha de lanzamiento del producto: </label>
+        <input type="date" name="fecha_lanzamiento" class="form-control"
+        placeholder="Fecha de lanzamiento" required
+        value="<?php 
+        print isset($datos['data']['fecha_lanzamiento'])?$datos['data']['fecha_lanzamiento']:''; 
+        ?>"
+        >
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="status">Estado del producto: </label>
+        <select class="form-control" name="status" id="status">
+            <option value="void">Selecciona estado del producto</option>
+        </select>
+     </div>
+
+     <div class="form-group text-left"> 
+        <label for="nuevos"><input type="checkbox" name="nuevos" id="nuevos">Producto Nuevo</label>
+     </div>
+
      </div class="form-group text-left"><br>
      
      <div>
