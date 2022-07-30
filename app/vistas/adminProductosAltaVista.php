@@ -1,7 +1,11 @@
 <?php include_once("encabezado.php");   ?>
+<!-- editor para html CKEeditor 5 -->
+
 <h1 class="text-center">Añadir un producto</h1>
 <div class="card p-4 bg-light">
-    <form action="<?php print RUTA; ?>adminProductos/alta/" method="POST" enctype="multipart/form-data">
+    <form action="<?php print RUTA; ?>adminProductos/alta/" method="POST"
+    enctype="multipart/form-data">
+    <!-- para indicar que vamos a subir archivos -->
      <div class="form-group text-left"> 
         <label for="usuario">* Tipo del producto: </label>
         <select class="form-control" name="tipo" id="tipo">
@@ -17,26 +21,26 @@
      <div class="form-group text-left">
         <label for="nombre">* Nombre del producto: </label>
         <input type="text" name="nombre" class="form-control"
-        placeholder="Escribe el nombre del producto" required
+        placeholder="Escribe el nombre del producto" 
         value="<?php 
         print isset($datos['data']['nombre'])?$datos['data']['nombre']:''; 
         ?>"
         >
      </div>
      <div class="form-group text-left">
-        <label for="descripcion">* Descripción: </label>
-        <input type="text" name="descripcion" class="form-control"
-        placeholder="Escribe la descripción del producto" required
+      <label for="content">* Descripción:</label>
+      <input type="text" name="descripcion" class="form-control"
+        placeholder="Escribe la descripcion del producto" 
         value="<?php 
         print isset($datos['data']['descripcion'])?$datos['data']['descripcion']:''; 
         ?>"
         >
-     </div>
+    </div>
 
      <div class="form-group text-left">
         <label for="desarrolladora">* Desarrolladora: </label>
         <input type="text" name="desarrolladora" class="form-control"
-        placeholder="Escribe la desarrolladora" required
+        placeholder="Escribe la desarrolladora" 
         value="<?php 
         print isset($datos['data']['desarrolladora'])?$datos['data']['desarrolladora']:''; 
         ?>"
@@ -46,7 +50,7 @@
      <div class="form-group text-left">
         <label for="editor">* Editor: </label>
         <input type="text" name="editor" class="form-control"
-        placeholder="Escribe el editor" required
+        placeholder="Escribe el editor" 
         value="<?php 
         print isset($datos['data']['editor'])?$datos['data']['editor']:''; 
         ?>"
@@ -57,7 +61,7 @@
         <label for="precio">* Precio del producto: </label>
         <input type="text" name="precio" class="form-control"
         pattern="^(\d|-)?(\d|,)*\.?\d*$"
-        placeholder="Escribe el precio del producto (sin comas ni símbolos)" required
+        placeholder="Escribe el precio del producto (sin comas ni símbolos)" 
         value="<?php 
         print isset($datos['data']['precio'])?$datos['data']['precio']:''; 
         ?>"
@@ -84,7 +88,7 @@
      <div class="form-group text-left"> 
         <label for="fecha_lanzamiento">* Fecha de lanzamiento del producto: </label>
         <input type="date" name="fecha_lanzamiento" class="form-control"
-        placeholder="Fecha de lanzamiento (DD/MM/AAAA)" required
+        placeholder="Fecha de lanzamiento" 
         value="<?php 
         print isset($datos['data']['fecha_lanzamiento'])?$datos['data']['fecha_lanzamiento']:''; 
         ?>"
@@ -93,8 +97,8 @@
 
      <div class="form-group text-left"> 
         <label for="status">Estado del producto: </label>
-       <select class="form-control" name="status" id="status">
-            <option value="void">Selecciona el estado de producto</option>
+        <select class="form-control" name="status" id="status">
+            <option value="void">Selecciona el status del producto</option>
             <?php
                 for ($i=0; $i < count($datos["statusProducto"]); $i++) { 
                    print "<option value='".$datos["statusProducto"][$i]["indice"]."'";

@@ -41,9 +41,66 @@ class AdminProductos extends Controlador{
         //Leemos las llaves de tipo producto  
       $llaves = $this->modelo->getLlaves("tipoProducto");
 
-        //Leemos el estado del producto
-      $statusProducto = $this->modelo->getLlaves("statusProducto");
+        //Leemos los status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
 
+        //Leemos los status del Producto  
+        $catalogo = $this->modelo->getCatalogo();
+
+        //Recibimos la informacion de la vista
+        if ($_SERVER['REQUEST_METHOD']=="POST"){
+            //Recibimos la informacion
+            $tipo = isset($_POST['tipo'])?$_POST['tipo']:"";
+            $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
+            $descripcion = isset($_POST['descripcion'])?$_POST['descripcion']:"";
+            $precio = isset($_POST['precio'])?$_POST['precio']:"";
+            $descuento = isset($_POST['descuento'])?$_POST['descuento']:"0";
+            $imagen = isset($_POST['imagen'])?$_POST['imagen']:"";
+            $fecha_lanzamiento = isset($_POST['fecha_lanzamiento'])?$_POST['fecha_lanzamiento']:"";
+            $nuevos = isset($_POST['nuevos'])?$_POST['nuevos']:"";
+            $status = isset($_POST['status'])?$_POST['status']:"";
+            $desarrolladora = isset($_POST['desarrolladora'])?$_POST['desarrolladora']:"";
+            $editor = isset($_POST['editor'])?$_POST['editor']:"";
+            
+            //Validamos la informacion
+            if(empty($nombre)){
+                array_push($errores,"El nombre es requerido.");
+              }
+            if(empty($descripcion)){
+                array_push($errores,"La descripcion es requerida.");
+              }
+            if(empty($desarrolladora)){
+                array_push($errores,"La desarrolladora es requerida.");
+              }
+
+              if($precio < $descuento){
+                array_push($errores,"El descuento no puede ser mayor al producto");
+              }
+              
+            //Creacion del arreglo de datos
+            $data = [ 
+                "tipo" => $tipo,
+                "nombre" =>$nombre,
+                "descripcion" =>$descripcion,
+                "precio" => $precio,
+                "descuento" => $descuento,
+                "imagen" => $imagen,
+                "fecha_lanzamiento" =>$fecha_lanzamiento,
+                "nuevos" => $nuevos,
+                "status" => $status,
+                "desarrolladora" => $desarrolladora,
+                "editor" => $editor   
+                
+            ];
+
+
+            if(empty($errores)){
+                //Enviamos al modelo
+                if($this->modelo->altaProducto($data)){
+
+                }
+            }
+        }
 
        //Vista añadir producto
       $datos = [
@@ -53,6 +110,7 @@ class AdminProductos extends Controlador{
         "errores" => $errores,
         "tipoProducto" => $llaves,
         "statusProducto" => $statusProducto,
+        "catalogo" => $catalogo,
         "data" => $data
     ];
     $this->vista("adminProductosAltaVista",$datos);
