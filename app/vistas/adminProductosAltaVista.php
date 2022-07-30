@@ -1,7 +1,7 @@
 <?php include_once("encabezado.php");   ?>
 <h1 class="text-center">Añadir un producto</h1>
 <div class="card p-4 bg-light">
-    <form action="<?php print RUTA; ?>adminProsuctos/alta/" method="POST">
+    <form action="<?php print RUTA; ?>adminProductos/alta/" method="POST" enctype="multipart/form-data">
      <div class="form-group text-left"> 
         <label for="usuario">* Tipo del producto: </label>
         <select class="form-control" name="tipo" id="tipo">
@@ -78,14 +78,13 @@
      <div class="form-group text-left"> 
         <label for="imagen">* Imagen del producto: </label>
         <input type="file" name="imagen" class="form-control"
-        accept="imagen/jpeg" 
-        >
+        accept="imagen/jpeg"/>
      </div>
 
      <div class="form-group text-left"> 
         <label for="fecha_lanzamiento">* Fecha de lanzamiento del producto: </label>
         <input type="date" name="fecha_lanzamiento" class="form-control"
-        placeholder="Fecha de lanzamiento" required
+        placeholder="Fecha de lanzamiento (DD/MM/AAAA)" required
         value="<?php 
         print isset($datos['data']['fecha_lanzamiento'])?$datos['data']['fecha_lanzamiento']:''; 
         ?>"
@@ -94,13 +93,19 @@
 
      <div class="form-group text-left"> 
         <label for="status">Estado del producto: </label>
-        <select class="form-control" name="status" id="status">
-            <option value="void">Selecciona estado del producto</option>
+       <select class="form-control" name="status" id="status">
+            <option value="void">Selecciona el estado de producto</option>
+            <?php
+                for ($i=0; $i < count($datos["statusProducto"]); $i++) { 
+                   print "<option value='".$datos["statusProducto"][$i]["indice"]."'";
+                   print ">".$datos["statusProducto"][$i]["cadena"]."</option>";
+                }
+            ?>
         </select>
      </div>
 
-     <div class="form-group text-left"> 
-        <label for="nuevos"><input type="checkbox" name="nuevos" id="nuevos">Producto Nuevo</label>
+     <div class="form-check text-left"> 
+        <input type="checkbox" name="nuevos" id="nuevos" class="form-check-input"><label for="nuevos" class="form-check-label">Producto Nuevo</label>
      </div>
 
      </div class="form-group text-left"><br>
