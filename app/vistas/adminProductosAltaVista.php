@@ -13,6 +13,11 @@
             <?php
                 for ($i=0; $i < count($datos["tipoProducto"]); $i++) { 
                    print "<option value='".$datos["tipoProducto"][$i]["indice"]."'";
+                   if(isset($datos["data"]["tipo"])){
+                        if($datos["data"]["tipo"]==$datos["tipoProducto"][$i]["indice"]){
+                        print " selected ";
+                        }
+                   }
                    print ">".$datos["tipoProducto"][$i]["cadena"]."</option>";
                 }
             ?>
@@ -81,8 +86,13 @@
 
      <div class="form-group text-left"> 
         <label for="imagen">* Imagen del producto: </label>
-        <input type="file" name="imagen" class="form-control"
+        <input type="file" name="imagen"id="imagen" class="form-control"
         accept="imagen/jpeg"/>
+        <?php
+        if (isset($datos['data']['imagen'])) {
+            print "<p>".$datos['data']['imagen']."</p>";
+        }
+        ?>
      </div>
 
      <div class="form-group text-left"> 
@@ -102,6 +112,11 @@
             <?php
                 for ($i=0; $i < count($datos["statusProducto"]); $i++) { 
                    print "<option value='".$datos["statusProducto"][$i]["indice"]."'";
+                   if(isset($datos["data"]["status"])){
+                        if($datos["data"]["status"]==$datos["statusProducto"][$i]["indice"]){
+                        print " selected ";
+                        }
+                   }
                    print ">".$datos["statusProducto"][$i]["cadena"]."</option>";
                 }
             ?>
@@ -109,7 +124,13 @@
      </div>
 
      <div class="form-check text-left"> 
-        <input type="checkbox" name="nuevos" id="nuevos" class="form-check-input"><label for="nuevos" class="form-check-label">Producto Nuevo</label>
+        <input type="checkbox" name="nuevos" id="nuevos" class="form-check-input"
+        <?php
+        if (isset($datos['data']['nuevos'])) {
+            if($datos['data']['nuevos']=="on") print " checked ";
+        }
+        ?>
+        ><label for="nuevos" class="form-check-label">Producto Nuevo</label>
      </div>
 
      </div class="form-group text-left"><br>

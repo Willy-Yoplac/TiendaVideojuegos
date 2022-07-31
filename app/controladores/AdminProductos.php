@@ -76,7 +76,22 @@ class AdminProductos extends Controlador{
               if($precio < $descuento){
                 array_push($errores,"El descuento no puede ser mayor al producto");
               }
-              
+             
+
+              //Cambiar el nombre del archivo
+              $imagen = $_POST['nombre'];
+              $imagen = strtolower($imagen.".jpg");
+
+              //Subir la imagen (archivo)
+
+              if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+                //Copiamos el archivo temporal
+                copy($_FILES['imagen']['tmp_name'],"img/".$imagen);
+              } else {
+                array_push($errores, "Error al subir el archivo imagen.");
+              }
+
+
             //Creacion del arreglo de datos
             $data = [ 
                 "tipo" => $tipo,
@@ -93,11 +108,11 @@ class AdminProductos extends Controlador{
                 
             ];
 
-
+            //Si no hay errores
             if(empty($errores)){
                 //Enviamos al modelo
                 if($this->modelo->altaProducto($data)){
-
+                  header("location:".RUTA.AdminProductos);
                 }
             }
         }
@@ -113,6 +128,7 @@ class AdminProductos extends Controlador{
         "catalogo" => $catalogo,
         "data" => $data
     ];
+    var_dump($data);
     $this->vista("adminProductosAltaVista",$datos);
     }
 
