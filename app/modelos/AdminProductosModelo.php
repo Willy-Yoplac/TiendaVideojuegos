@@ -28,20 +28,21 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
+    //eliminé-> "'ORDER BY indice DESC"
     $data = $this->db->querySelect($sql);
     return $data;
   }
 
-  public function getProductoId($id){
-    $sql = "SELECT * FROM productos WHERE id=".$id;
+  public function getProductoId($idProducto){
+    $sql = "SELECT * FROM productos WHERE idProducto=".$idProducto;
     $data = $this->db->query($sql);
     return $data;
   }
 
-  public function bajaLogica($id){
+  public function bajaLogica($idProducto){
     $errores = array();
-    $sql = "UPDATE productos SET baja=1 WHERE id=".$id;
+    $sql = "UPDATE productos SET baja=1 WHERE idProducto=".$idProducto;
     if(!$this->db->queryNoSelect($sql)){
       array_push($errores,"Error al modificar el registro para baja.");
     }

@@ -45,7 +45,7 @@ class AdminProductos extends Controlador{
         $statusProducto = $this->modelo->getLlaves("statusProducto");
 
         //Leemos los status del Producto  
-        $catalogo = $this->modelo->getCatalogo();
+        //$catalogo = $this->modelo->getCatalogo();
 
         //Recibimos la informacion de la vista
         if ($_SERVER['REQUEST_METHOD']=="POST"){
@@ -125,10 +125,9 @@ class AdminProductos extends Controlador{
         "errores" => $errores,
         "tipoProducto" => $llaves,
         "statusProducto" => $statusProducto,
-        "catalogo" => $catalogo,
         "data" => $data
     ];
-    var_dump($data);
+    
     $this->vista("adminProductosAltaVista",$datos);
     }
 
@@ -140,7 +139,28 @@ class AdminProductos extends Controlador{
     //ACTUALIZAR 
     public function cambio($idProducto="")
     {
-        # code...
+        //Leemos las llaves de tipo producto  
+        $llaves = $this->modelo->getLlaves("tipoProducto");
+
+        //Leemos los status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
+
+        //Leemos los datos del idProducto
+        $data = $this->modelo->getProductoId($idProducto);
+        print_r($data);
+
+        $datos = [
+          "titulo" => "Administrativo Productos Modificar",
+          "menu" => false,
+          "admin" => true,
+          "errores" => [],
+          "tipoProducto" => $llaves,
+          "statusProducto" => $statusProducto,
+          "data" => $data
+      ];
+
+      $this->vista("adminProductosAltaVista",$datos);
+
     }
 }
 
