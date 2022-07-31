@@ -13,9 +13,10 @@
 	<tbody>
 		<?php
 		for($i=0; $i<count($datos['data']); $i++){
+			$tipo = $datos["data"][$i]["tipo"]-1;
 			print "<tr>";
-			print "<td class='text-center'>".$datos["data"][$i]["idProducto"]."</td>";
-			print "<td class='text-left'>".$datos["data"][$i]["tipo"]."</td>";
+			print "<td class='text-left'>".$datos["data"][$i]["idProducto"]."</td>";
+			print "<td class='text-left'>".$datos["tipoProducto"][$tipo]['cadena']."</td>";
 			print "<td class='text-left'>".$datos["data"][$i]["nombre"]."</td>";
             print "<td class='text-left'>".$datos["data"][$i]["descripcion"]."</td>";
 

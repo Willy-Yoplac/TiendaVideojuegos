@@ -28,7 +28,8 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
+    //eliminé-> "'ORDER BY indice DESC"
     $data = $this->db->querySelect($sql);
     return $data;
   }
@@ -48,8 +49,9 @@ class AdminProductosModelo{
     return $errores;
   }
 
-  public function modificaProductos($data){
+  public function modificaProducto($data){
     $errores = array();
+    var_dump($data);
     return $errores;
   }
 
