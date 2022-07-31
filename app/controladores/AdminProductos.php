@@ -73,17 +73,15 @@ class AdminProductos extends Controlador{
                 array_push($errores,"La desarrolladora es requerida.");
               }
 
-              if($precio < $descuento){
+            if($precio < $descuento){
                 array_push($errores,"El descuento no puede ser mayor al producto");
               }
-             
 
               //Cambiar el nombre del archivo
               $imagen = $_POST['nombre'];
               $imagen = strtolower($imagen.".jpg");
 
               //Subir la imagen (archivo)
-
               if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
                 //Copiamos el archivo temporal
                 copy($_FILES['imagen']['tmp_name'],"img/".$imagen);
@@ -109,17 +107,28 @@ class AdminProductos extends Controlador{
             ];
 
             //Si no hay errores
-            if(empty($errores)){
-                //Enviamos al modelo
-                if($this->modelo->altaProducto($data)){
-                  header("location:".RUTA.AdminProductos);
+            if (empty($errores)) {
+        
+              //Enviamos al modelo
+              if($id==""){
+                //Alta
+                if ($this->modelo->altaProducto($data)) {
+                  header("location:".RUTA."adminProductos");
                 }
+              } else {
+                //Modificacion
+                if ($this->modelo->modificaProducto($data)) {
+                  header("location:".RUTA."adminProductos");
+                }
+              }
+              
             }
         }
 
        //Vista añadir producto
       $datos = [
         "titulo" => "Administrativo Productos Añadir",
+        "subtitulo" => "Modificar un Producto",
         "menu" => false,
         "admin" => true,
         "errores" => $errores,
@@ -151,6 +160,7 @@ class AdminProductos extends Controlador{
 
         $datos = [
           "titulo" => "Administrativo Productos Modificar",
+          "subtitulo" => "Modificar un Producto",
           "menu" => false,
           "admin" => true,
           "errores" => [],

@@ -49,8 +49,9 @@ class AdminProductosModelo{
     return $errores;
   }
 
-  public function modificaProductos($data){
+  public function modificaProducto($data){
     $errores = array();
+    var_dump($data);
     return $errores;
   }
 

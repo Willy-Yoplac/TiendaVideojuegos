@@ -1,7 +1,11 @@
 <?php include_once("encabezado.php");   ?>
 <!-- editor para html CKEeditor 5 -->
 
-<h1 class="text-center">Añadir un producto</h1>
+<h1 class="text-center"><?php
+  if (isset($datos["subtitulo"])) {
+    print $datos["subtitulo"];
+  }
+  ?></h1>
 <div class="card p-4 bg-light">
     <form action="<?php print RUTA; ?>adminProductos/alta/" method="POST"
     enctype="multipart/form-data">
