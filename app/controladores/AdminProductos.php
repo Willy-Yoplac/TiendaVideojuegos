@@ -81,7 +81,7 @@ class AdminProductos extends Controlador{
               
             //Creacion del arreglo de datos
             $data = [ 
-                "idProducto" => $idProducto,
+              "idProducto" => $idProducto,
                 "tipo" => $tipo,
                 "nombre" =>$nombre,
                 "descripcion" =>$descripcion,
@@ -96,21 +96,20 @@ class AdminProductos extends Controlador{
                 
             ];
 
-
-            if(empty($errores)){
-                //Enviamos al modelo
-                if($idProducto==""){
-                   
-                  if($this->modelo->altaProducto($data)){
-                    //header("location:".RUTA."adminProductos");
-
-                  }
+            //Si no hay errores
+            if (empty($errores)) {
+        
+              //Enviamos al modelo
+              print_r($idProducto);
+              if($idProducto==""){
+                // Si es vacio agrega
+                if ($this->modelo->altaProducto($data)) {
+                 // header("location:".RUTA."adminProductos");
                 }
-                else {
-                  //Modificacion
-                  if ($this->modelo->modificaProducto($data)) {
-                   // header("location:".RUTA."adminProductos");
-                  }
+              } else {
+                //Modificacion
+                if ($this->modelo->modificaProducto($data)) {
+                 // header("location:".RUTA."adminProductos");
                 }
             }
         }
