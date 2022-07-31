@@ -33,15 +33,15 @@ class AdminProductosModelo{
     return $data;
   }
 
-  public function getProductoId($id){
-    $sql = "SELECT * FROM productos WHERE id=".$id;
+  public function getProductoId($idProducto){
+    $sql = "SELECT * FROM productos WHERE idProducto=".$idProducto;
     $data = $this->db->query($sql);
     return $data;
   }
 
-  public function bajaLogica($id){
+  public function bajaLogica($idProducto){
     $errores = array();
-    $sql = "UPDATE productos SET baja=1 WHERE id=".$id;
+    $sql = "UPDATE productos SET baja=1 WHERE idProducto=".$idProducto;
     if(!$this->db->queryNoSelect($sql)){
       array_push($errores,"Error al modificar el registro para baja.");
     }
@@ -54,7 +54,7 @@ class AdminProductosModelo{
   }
 
   public function altaProducto($data){
-    $sql = "INSERT INTO productos VALUES(0,"; //1. id
+    $sql = "INSERT INTO productos VALUES(0,"; //1. idProducto
     $sql.= "'".$data['tipo']."', ";           //2. tipo
    $sql.= "'".$data['nombre']."', ";          //3. nombre
    $sql.= "'".$data['descripcion']."', ";     //4. descripcion
