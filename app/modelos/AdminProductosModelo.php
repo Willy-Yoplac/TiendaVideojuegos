@@ -70,10 +70,10 @@ class AdminProductosModelo{
    
    $sql.= "'".$data['nuevos']."', ";           //14. nuevos
    $sql.= "'".$data['status']."', ";          //15. status
-   $sql.= "0, ";                              //16. baja
+   $sql.= "0, ";                              //
    
-   $sql.= "'".$data['desarrolladora']."', ";           //20. autor
-   $sql.= "'".$data['editor']."')";       //21. editorial
+   $sql.= "'".$data['desarrolladora']."', ";           //
+   $sql.= "'".$data['editor']."')";       //
   
    print $sql;
    return $this->db->queryNoSelect($sql);
