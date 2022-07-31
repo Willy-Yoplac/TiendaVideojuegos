@@ -23,8 +23,42 @@ crossorigin="anonymous"></script>
         <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Zona-Games</a>
         <div class="collapse navbar-collapse" id="menu">
         <?php if ($datos["menu"]){
-            #menu
+           
+            print "<ul class='navbar-nav mr-auto mt-2 mt-lg-0'>";
+            print "<li class='nav-item'>";
+            print "<a href='".RUTA."aventura' class='nav-link ";
+            if(isset($datos["activo"]) && $datos["activo"]=="aventura") print "active";
+            print "'>Aventura</a>";
+            print "</li>";
+
+            print "<li class='nav-item'>";
+            print "<a href='".RUTA."deportes' class='nav-link";
+            if(isset($datos["activo"]) && $datos["activo"]=="deportes") print "active";
+            print ">Deportes</a>";
+            print "</li>";
+
+            print "<li class='nav-item'>";
+            print "<a href='".RUTA."sobreNosotros' class='nav-link";
+            if(isset($datos["activo"]) && $datos["activo"]=="sobrenosotros") print "active";
+            print "'>Sobre Nosotros</a>";
+            print "</li>";
+
+            print "<li class='nav-item'>";
+            print "<a href='".RUTA."contacto' class='nav-link";
+            if(isset($datos["activo"]) && $datos["activo"]=="contacto") print "active";
+            print "'>Contacto</a>";
+            print "</li>";
+            print "</ul>";
+
+            // Derecha -> Salir
+            print "<ul class='nav navbar-nav navbar-right'>";
+            //
+            print "<li class='nav-item'>";
+            print "<a href='".RUTA."logout' class='nav-link'>Logout</a>";
+            print "</li>";
+            print "</ul>";
         }
+        
         if(isset($datos["admin"])){
             if($datos["admin"]){
                 print "<ul class='navbar-nav mr-auto mt-2 mt-lg-0'>";

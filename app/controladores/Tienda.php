@@ -11,8 +11,12 @@ class Tienda extends Controlador {
     function caratula(){
     	$sesion = new Sesion();
     	if ($sesion->getLogin()) {
-    		var_dump($sesion->getUsuario());
-    		$datos = ["titulo" => "Bienvenido a Zona-Games", "menu" =>false];
+    		//var_dump($sesion->getUsuario());
+    		$datos = [
+                "titulo" => "Bienvenido a Zona-Games",
+                "activo" => "aventura",
+                "menu" =>true
+            ];
         $this->vista("tiendaVista", $datos);  
     	} else {
     		header("location:".RUTA);

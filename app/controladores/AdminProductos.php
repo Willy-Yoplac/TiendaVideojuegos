@@ -49,7 +49,9 @@ class AdminProductos extends Controlador{
 
         //Recibimos la informacion de la vista
         if ($_SERVER['REQUEST_METHOD']=="POST"){
+
             //Recibimos la informacion
+            $idProducto = isset($_POST['idProducto'])?$_POST['idProducto']:"";
             $tipo = isset($_POST['tipo'])?$_POST['tipo']:"";
             $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
             $descripcion = isset($_POST['descripcion'])?$_POST['descripcion']:"";
@@ -79,6 +81,7 @@ class AdminProductos extends Controlador{
               
             //Creacion del arreglo de datos
             $data = [ 
+                "idProducto" => $idProducto,
                 "tipo" => $tipo,
                 "nombre" =>$nombre,
                 "descripcion" =>$descripcion,
@@ -96,8 +99,18 @@ class AdminProductos extends Controlador{
 
             if(empty($errores)){
                 //Enviamos al modelo
-                if($this->modelo->altaProducto($data)){
+                if($idProducto==""){
+                   
+                  if($this->modelo->altaProducto($data)){
+                    //header("location:".RUTA."adminProductos");
 
+                  }
+                }
+                else {
+                  //Modificacion
+                  if ($this->modelo->modificaProducto($data)) {
+                   // header("location:".RUTA."adminProductos");
+                  }
                 }
             }
         }

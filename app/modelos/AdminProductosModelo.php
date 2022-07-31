@@ -75,6 +75,7 @@ class AdminProductosModelo{
    $sql.= "'".$data['editor']."')";       //21. editorial
   
    print $sql;
+   
    return $this->db->queryNoSelect($sql);
   }
 }
