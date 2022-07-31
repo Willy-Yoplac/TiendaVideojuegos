@@ -52,6 +52,7 @@ class AdminProductosModelo{
   public function modificaProducto($data){
     $errores = array();
     var_dump($data);
+    echo "Estoy en modificar productos";
     return $errores;
   }
 
