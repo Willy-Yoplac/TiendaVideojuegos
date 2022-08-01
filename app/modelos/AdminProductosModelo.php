@@ -28,8 +28,8 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
-    //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'ORDER BY indice DESC"; 
+   
     $data = $this->db->querySelect($sql);
     return $data;
   }
@@ -51,10 +51,32 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    print_r( $data);
+    $salida = false;
+    //print_r($data);
+    if (!empty($data["idProducto"])) {
+       $sql = "UPDATE productos SET "; //1. id
+       $sql.= "tipo='".$data['tipo']."', ";           //2. tipo
+       $sql.= "nombre='".$data['nombre']."', ";          //3. nombre
+       $sql.= "descripcion='".$data['descripcion']."', ";     //4. descripcion
+       $sql.= "precio=".$data['precio'].", ";               //5. precio
+       $sql.= "descuento=".$data['descuento'].", ";            //6. descuento 
+       $sql.= "imagen='".$data['imagen']."', ";          //8. imagen
+       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           //9. fecha
+       $sql.= "nuevos='".$data['nuevos']."', ";           //14. nuevos
+       $sql.= "status='".$data['status']."', ";          //15. status
+       $sql.= "baja=0, ";                              //16. baja
+       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           //20. autor
+       $sql.= "editor='".$data['editor']."' ";       //21. editor
+       $sql.= "WHERE idProducto=".$data['idProducto'];
+       //Enviamos a la BD
+       //$salida = $this->db->queryNoSelect($sql);
+       print $sql;
+    }
     
-    echo "Estoy en modificar productos";
-    return $errores;
+   // echo "estoy en modificar producto";
+    return $salida;
+
+    
   }
 
   public function altaProducto($data){
