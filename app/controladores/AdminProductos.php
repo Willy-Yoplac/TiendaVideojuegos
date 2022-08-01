@@ -93,7 +93,7 @@ class AdminProductos extends Controlador{
 
             //Creacion del arreglo de datos
             $data = [ 
-              "idProducto" => $idProducto,
+                "idProducto" => $idProducto,
                 "tipo" => $tipo,
                 "nombre" =>$nombre,
                 "descripcion" =>$descripcion,
