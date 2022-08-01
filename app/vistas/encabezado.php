@@ -54,7 +54,7 @@ crossorigin="anonymous"></script>
             print "<ul class='nav navbar-nav navbar-right'>";
             //
             print "<li class='nav-item'>";
-            print "<a href='".RUTA."logout' class='nav-link'>Logout</a>";
+            print "<a href='".RUTA."tienda/logout' class='nav-link'>Logout</a>";
             print "</li>";
             print "</ul>";
         }

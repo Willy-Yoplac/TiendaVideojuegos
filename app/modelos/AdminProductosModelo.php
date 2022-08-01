@@ -51,7 +51,8 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    var_dump($data);
+    print_r( $data);
+    
     echo "Estoy en modificar productos";
     return $errores;
   }
@@ -78,6 +79,12 @@ class AdminProductosModelo{
    print $sql;
    
    return $this->db->queryNoSelect($sql);
+  }
+  public function getNuevos()
+  {
+    $sql = "SELECT * FROM productos WHERE nuevos=1 AND baja=0 LIMIT 2 ";
+    $data = $this->db->querySelect($sql);
+    return $data;
   }
 }
 

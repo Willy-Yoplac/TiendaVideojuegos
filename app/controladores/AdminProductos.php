@@ -45,11 +45,10 @@ class AdminProductos extends Controlador{
         $statusProducto = $this->modelo->getLlaves("statusProducto");
 
         //Leemos los status del Producto  
-        $catalogo = $this->modelo->getCatalogo();
+        //$catalogo = $this->modelo->getCatalogo();
 
         //Recibimos la informacion de la vista
         if ($_SERVER['REQUEST_METHOD']=="POST"){
-
             //Recibimos la informacion
             $idProducto = isset($_POST['idProducto'])?$_POST['idProducto']:"";
             $tipo = isset($_POST['tipo'])?$_POST['tipo']:"";
@@ -75,10 +74,23 @@ class AdminProductos extends Controlador{
                 array_push($errores,"La desarrolladora es requerida.");
               }
 
-              if($precio < $descuento){
+            if($precio < $descuento){
                 array_push($errores,"El descuento no puede ser mayor al producto");
               }
-              
+
+              //Cambiar el nombre del archivo
+              $imagen = $_POST['nombre'];
+              $imagen = strtolower($imagen.".jpg");
+
+              //Subir la imagen (archivo)
+              if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+                //Copiamos el archivo temporal
+                copy($_FILES['imagen']['tmp_name'],"img/".$imagen);
+              } else {
+                array_push($errores, "Error al subir el archivo imagen.");
+              }
+
+
             //Creacion del arreglo de datos
             $data = [ 
               "idProducto" => $idProducto,
@@ -100,7 +112,7 @@ class AdminProductos extends Controlador{
             if (empty($errores)) {
         
               //Enviamos al modelo
-              print_r($idProducto);
+              
               if($idProducto==""){
                 // Si es vacio agrega
                 if ($this->modelo->altaProducto($data)) {
@@ -111,20 +123,23 @@ class AdminProductos extends Controlador{
                 if ($this->modelo->modificaProducto($data)) {
                  // header("location:".RUTA."adminProductos");
                 }
+              }
+              
             }
         }
 
        //Vista añadir producto
       $datos = [
         "titulo" => "Administrativo Productos Añadir",
+        "subtitulo" => "Modificar un Producto",
         "menu" => false,
         "admin" => true,
         "errores" => $errores,
         "tipoProducto" => $llaves,
         "statusProducto" => $statusProducto,
-        "catalogo" => $catalogo,
         "data" => $data
     ];
+    
     $this->vista("adminProductosAltaVista",$datos);
     }
 
@@ -136,33 +151,36 @@ class AdminProductos extends Controlador{
     //ACTUALIZAR 
     public function cambio($idProducto="")
     {
-         //Leemos las llaves de tipo producto  
-         $llaves = $this->modelo->getLlaves("tipoProducto");
+        //Leemos las llaves de tipo producto  
+        $llaves = $this->modelo->getLlaves("tipoProducto");
 
-         //Leemos los status del Producto  
-         $statusProducto = $this->modelo->getLlaves("statusProducto");
+        //Leemos los status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
 
-         //Leemos los status del Producto  
-        $catalogo = $this->modelo->getCatalogo();
- 
-         //Leemos los datos del idProducto
-         $data = $this->modelo->getProductoId($idProducto);
-         print_r($data);
- 
-         $datos = [
-           "titulo" => "Administrativo Productos Modificar",
-           "menu" => false,
-           "admin" => true,
-           "errores" => [],
-           "tipoProducto" => $llaves,
-           "statusProducto" => $statusProducto,
-         
-           "data" => $data
-       ];
- 
-       $this->vista("adminProductosAltaVista",$datos);
- 
+        //Leemos los datos del idProducto
+        $data = $this->modelo->getProductoId($idProducto);
+        print_r($data);
+
+        $datos = [
+          "titulo" => "Administrativo Productos Modificar",
+          "subtitulo" => "Modificar un Producto",
+          "menu" => false,
+          "admin" => true,
+          "errores" => [],
+          "tipoProducto" => $llaves,
+          "statusProducto" => $statusProducto,
+          "data" => $data
+      ];
+
+      $this->vista("adminProductosAltaVista",$datos);
+
+    }
+
+    public function getNuevos()
+    {
+      return $this->modelo->getNuevos();
+    }
 }
-}
+
 
 ?>
