@@ -10,9 +10,6 @@ class AdminProductosModelo{
     $this->db = new MySQLdb();
   }
 
-  public function insertarDatos($data){
-  }
-
   public function getProductos(){
     $sql = "SELECT * FROM productos WHERE baja=0";
     $data = $this->db->querySelect($sql);
@@ -33,24 +30,42 @@ class AdminProductosModelo{
     return $data;
   }
 
-  public function getProductoId($id){
-    $sql = "SELECT * FROM productos WHERE id=".$id;
+  public function getProductoId($idProducto){
+    $sql = "SELECT * FROM productos WHERE idProducto=".$idProducto;
     $data = $this->db->query($sql);
     return $data;
   }
 
-  public function bajaLogica($id){
+  public function bajaLogica($idProducto){
     $errores = array();
-    $sql = "UPDATE productos SET baja=1 WHERE id=".$id;
+    $sql = "UPDATE productos SET baja=1 WHERE idProducto=".$idProducto;
     if(!$this->db->queryNoSelect($sql)){
       array_push($errores,"Error al modificar el registro para baja.");
     }
     return $errores;
   }
 
-  public function modificaProductos($data){
-    $errores = array();
-    return $errores;
+  public function modificaProducto($data){
+    $salida = false;
+    if (!empty($data["idProducto"])) {
+       $sql = "UPDATE productos SET "; //1. id
+       $sql.= "tipo='".$data['tipo']."', ";           //2. tipo
+       $sql.= "nombre='".$data['nombre']."', ";          //3. nombre
+       $sql.= "descripcion'".$data['descripcion']."', ";     //4. descripcion
+       $sql.= "precio=".$data['precio'].", ";               //5. precio
+       $sql.= "descuento=".$data['descuento'].", ";            //6. descuento 
+       $sql.= "imagen='".$data['imagen']."', ";          //8. imagen
+       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           //9. fecha
+       $sql.= "nuevos='".$data['nuevos']."', ";           //14. nuevos
+       $sql.= "status='".$data['status']."', ";          //15. status
+       $sql.= "baja=0, ";                              //16. baja
+       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           //20. autor
+       $sql.= "editor='".$data['editor']."')";       //21. editor
+       $sql.= "WHERE idProducto=".$data['idProducto'];
+       //Enviamos a la BD
+       $salida = $this->db->queryNoSelect($sql);
+    }
+    return $salida;
   }
 
   public function altaProducto($data){
