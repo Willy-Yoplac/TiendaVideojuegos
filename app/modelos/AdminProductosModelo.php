@@ -25,7 +25,8 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
+    //eliminé-> "'ORDER BY indice DESC"
     $data = $this->db->querySelect($sql);
     return $data;
   }
@@ -46,30 +47,15 @@ class AdminProductosModelo{
   }
 
   public function modificaProducto($data){
-    $salida = false;
-    if (!empty($data["idProducto"])) {
-       $sql = "UPDATE productos SET "; //1. id
-       $sql.= "tipo='".$data['tipo']."', ";           //2. tipo
-       $sql.= "nombre='".$data['nombre']."', ";          //3. nombre
-       $sql.= "descripcion'".$data['descripcion']."', ";     //4. descripcion
-       $sql.= "precio=".$data['precio'].", ";               //5. precio
-       $sql.= "descuento=".$data['descuento'].", ";            //6. descuento 
-       $sql.= "imagen='".$data['imagen']."', ";          //8. imagen
-       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           //9. fecha
-       $sql.= "nuevos='".$data['nuevos']."', ";           //14. nuevos
-       $sql.= "status='".$data['status']."', ";          //15. status
-       $sql.= "baja=0, ";                              //16. baja
-       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           //20. autor
-       $sql.= "editor='".$data['editor']."')";       //21. editor
-       $sql.= "WHERE idProducto=".$data['idProducto'];
-       //Enviamos a la BD
-       $salida = $this->db->queryNoSelect($sql);
-    }
-    return $salida;
+    $errores = array();
+    print_r( $data);
+    
+    echo "Estoy en modificar productos";
+    return $errores;
   }
 
   public function altaProducto($data){
-    $sql = "INSERT INTO productos VALUES(0,"; //1. id
+    $sql = "INSERT INTO productos VALUES(0,"; //1. idProducto
     $sql.= "'".$data['tipo']."', ";           //2. tipo
    $sql.= "'".$data['nombre']."', ";          //3. nombre
    $sql.= "'".$data['descripcion']."', ";     //4. descripcion
@@ -82,13 +68,20 @@ class AdminProductosModelo{
    
    $sql.= "'".$data['nuevos']."', ";           //14. nuevos
    $sql.= "'".$data['status']."', ";          //15. status
-   $sql.= "0, ";                              //16. baja
+   $sql.= "0, ";                              //
    
-   $sql.= "'".$data['desarrolladora']."', ";           //20. autor
-   $sql.= "'".$data['editor']."')";       //21. editorial
+   $sql.= "'".$data['desarrolladora']."', ";           //
+   $sql.= "'".$data['editor']."')";       //
   
    print $sql;
+   
    return $this->db->queryNoSelect($sql);
+  }
+  public function getNuevos()
+  {
+    $sql = "SELECT * FROM productos WHERE nuevos=1 AND baja=0 LIMIT 2 ";
+    $data = $this->db->querySelect($sql);
+    return $data;
   }
 }
 
