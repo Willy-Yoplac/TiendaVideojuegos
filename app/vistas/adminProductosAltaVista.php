@@ -140,15 +140,9 @@
      </div class="form-group text-left"><br>
      
      <!-- Problemas -->
-     <input type="hidden" name="idProducto" id="idProducto" value="
-      <?php
-        if (isset($datos['data']['idProducto'])) {
-          print $datos['data']['idProducto'];
-        } else {
-          print "";
-        }
-      ?>
-      ">
+    
+
+      <!-- ------------- -->
      
      <div>
         <input type="submit" value="Enviar" class="btn btn-success">

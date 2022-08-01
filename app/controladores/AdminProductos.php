@@ -112,7 +112,7 @@ class AdminProductos extends Controlador{
             if (empty($errores)) {
         
               //Enviamos al modelo
-              print_r($idProducto);
+              
               if($idProducto==""){
                 // Si es vacio agrega
                 if ($this->modelo->altaProducto($data)) {
@@ -174,6 +174,11 @@ class AdminProductos extends Controlador{
 
       $this->vista("adminProductosAltaVista",$datos);
 
+    }
+
+    public function getNuevos()
+    {
+      return $this->modelo->getNuevos();
     }
 }
 

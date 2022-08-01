@@ -51,13 +51,14 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    var_dump($data);
+    print_r( $data);
+    
     echo "Estoy en modificar productos";
     return $errores;
   }
 
   public function altaProducto($data){
-    $sql = "INSERT INTO productos VALUES(0,"; //1. id
+    $sql = "INSERT INTO productos VALUES(0,"; //1. idProducto
     $sql.= "'".$data['tipo']."', ";           //2. tipo
    $sql.= "'".$data['nombre']."', ";          //3. nombre
    $sql.= "'".$data['descripcion']."', ";     //4. descripcion
@@ -76,7 +77,14 @@ class AdminProductosModelo{
    $sql.= "'".$data['editor']."')";       //
   
    print $sql;
+   
    return $this->db->queryNoSelect($sql);
+  }
+  public function getNuevos()
+  {
+    $sql = "SELECT * FROM productos WHERE nuevos=1 AND baja=0 LIMIT 2 ";
+    $data = $this->db->querySelect($sql);
+    return $data;
   }
 }
 

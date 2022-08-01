@@ -28,6 +28,7 @@ class Sesion{
 	public function finalizarLogin(){
 		unset($_SESSION["usuario"]);
 		unset($this->usuario);
+		session_destroy();
 		$this->login = false;
 	}
 
