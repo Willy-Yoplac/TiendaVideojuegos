@@ -44,9 +44,6 @@ class AdminProductos extends Controlador{
         //Leemos los status del Producto  
         $statusProducto = $this->modelo->getLlaves("statusProducto");
 
-        //Leemos los status del Producto  
-        //$catalogo = $this->modelo->getCatalogo();
-
         //Recibimos la informacion de la vista
         if ($_SERVER['REQUEST_METHOD']=="POST"){
             //Recibimos la informacion
@@ -116,14 +113,14 @@ class AdminProductos extends Controlador{
               if($idProducto==""){
                 // Si es vacio agrega
                 if ($this->modelo->altaProducto($data)) {
-                 // header("location:".RUTA."adminProductos");
+                  header("location:".RUTA."adminProductos");
                 }
-              } else {
-                //Modificacion
-                if ($this->modelo->modificaProducto($data)) {
-                 // header("location:".RUTA."adminProductos");
-                }
-              }
+              // } else {
+              //   //Modificacion
+              //   if ($this->modelo->modificaProducto($data)) {
+              //     header("location:".RUTA."adminProductos");
+              //   }
+               }
               
             }
         }
@@ -153,11 +150,12 @@ class AdminProductos extends Controlador{
     public function cambio($idProducto="")
     {
         //Definir los arreglos
-        $data = array();
         $errores = array();
+        $data = array();
        
+       //Recibimos la informacion
         if ($_SERVER['REQUEST_METHOD']=="POST"){
-          //Recibimos la informacion
+          
           $idProducto = isset($_POST['idProducto'])?$_POST['idProducto']:"";
           $tipo = isset($_POST['tipo'])?$_POST['tipo']:"";
           $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
@@ -173,11 +171,11 @@ class AdminProductos extends Controlador{
           
           //Validamos la informacion
           if(empty($nombre)){
-              array_push($errores,"El nombre es requerido.");
-            }
-          if($status=="void"){
-              array_push($errores,"Seleciona ele estatus del producto.");
-            }
+            array_push($errores,"El nombre es requerido.");
+          }
+        if($status=="void"){
+            array_push($errores,"Seleciona ele estatus del producto.");
+          }
 
           if(empty($descripcion)){
               array_push($errores,"La descripcion es requerida.");
@@ -202,7 +200,7 @@ class AdminProductos extends Controlador{
               array_push($errores, "Error al subir el archivo imagen.");
             }
 
-
+if(empty($errores)){}
           //Creacion del arreglo de datos
           $data = [ 
               "idProducto" => $idProducto,
@@ -218,9 +216,17 @@ class AdminProductos extends Controlador{
               "desarrolladora" => $desarrolladora,
               "editor" => $editor         
           ];
-         // var_dump($data);
+         // Enviamos al modelo
           $errores = $this->modelo->modificaProducto($data);
-        }else{
+
+          //validamos la modificacion
+          if(empty($errores)){
+            header("location:".RUTA."adminProductos");
+            
+          }
+        
+        }
+
           //Leemos los datos del idProducto
         $data = $this->modelo->getProductoId($idProducto);
          //Leemos las llaves de tipo producto  
@@ -233,17 +239,15 @@ class AdminProductos extends Controlador{
           "subtitulo" => "Modificar un Producto",
           "menu" => false,
           "admin" => true,
-          "errores" => $errores,
           "tipoProducto" => $llaves,
           "statusProducto" => $statusProducto,
+          "errores" => $errores,
           "data" => $data
       ];
       
       $this->vista("adminProductosModificaVista",$datos);
 
         }
-
-    }
 
     public function getNuevos()
     {

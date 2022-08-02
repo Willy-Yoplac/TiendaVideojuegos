@@ -28,7 +28,7 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'ORDER BY indice DESC"; 
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'"; 
    
     $data = $this->db->querySelect($sql);
     return $data;
@@ -51,31 +51,30 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    $salida = false;
-    //print_r($data);
+ 
     if (!empty($data["idProducto"])) {
-       $sql = "UPDATE productos SET "; //1. id
-       $sql.= "tipo='".$data['tipo']."', ";           //2. tipo
-       $sql.= "nombre='".$data['nombre']."', ";          //3. nombre
-       $sql.= "descripcion='".$data['descripcion']."', ";     //4. descripcion
-       $sql.= "precio=".$data['precio'].", ";               //5. precio
-       $sql.= "descuento=".$data['descuento'].", ";            //6. descuento 
-       $sql.= "imagen='".$data['imagen']."', ";          //8. imagen
-       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           //9. fecha
-       $sql.= "nuevos='".$data['nuevos']."', ";           //14. nuevos
-       $sql.= "status='".$data['status']."', ";          //15. status
-       $sql.= "baja=0, ";                              //16. baja
-       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           //20. autor
-       $sql.= "editor='".$data['editor']."' ";       //21. editor
+       $sql = "UPDATE productos SET "; 
+       $sql.= "tipo='".$data['tipo']."', ";           
+       $sql.= "nombre='".$data['nombre']."', ";          
+       $sql.= "descripcion='".$data['descripcion']."', ";     
+       $sql.= "precio=".$data['precio'].", ";               
+       $sql.= "descuento=".$data['descuento'].", ";             
+       $sql.= "imagen='".$data['imagen']."', ";          
+       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           
+       $sql.= "nuevos='".$data['nuevos']."', ";           
+       $sql.= "status='".$data['status']."', ";          
+       $sql.= "baja=0, ";                              
+       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           
+       $sql.= "editor='".$data['editor']."' ";      
        $sql.= "WHERE idProducto=".$data['idProducto'];
-       //Enviamos a la BD
-       //$salida = $this->db->queryNoSelect($sql);
-       print $sql;
+       
+       if(!$this->db->queryNoSelect($sql)){
+        array_push($errores,"Existe un error, que aun no descubro de donde proviene.");
+         
     }
     
-   // echo "estoy en modificar producto";
-    return $salida;
-
+  }     
+    return $errores;
     
   }
 
