@@ -44,9 +44,6 @@ class AdminProductos extends Controlador{
         //Leemos los status del Producto  
         $statusProducto = $this->modelo->getLlaves("statusProducto");
 
-        //Leemos los status del Producto  
-        //$catalogo = $this->modelo->getCatalogo();
-
         //Recibimos la informacion de la vista
         if ($_SERVER['REQUEST_METHOD']=="POST"){
             //Recibimos la informacion
@@ -116,14 +113,14 @@ class AdminProductos extends Controlador{
               if($idProducto==""){
                 // Si es vacio agrega
                 if ($this->modelo->altaProducto($data)) {
-                 // header("location:".RUTA."adminProductos");
+                  header("location:".RUTA."adminProductos");
                 }
-              } else {
-                //Modificacion
-                if ($this->modelo->modificaProducto($data)) {
-                 // header("location:".RUTA."adminProductos");
-                }
-              }
+              // } else {
+              //   //Modificacion
+              //   if ($this->modelo->modificaProducto($data)) {
+              //     header("location:".RUTA."adminProductos");
+              //   }
+               }
               
             }
         }
@@ -148,33 +145,109 @@ class AdminProductos extends Controlador{
     {
         # code...
     }
+
     //ACTUALIZAR 
     public function cambio($idProducto="")
     {
-        //Leemos las llaves de tipo producto  
-        $llaves = $this->modelo->getLlaves("tipoProducto");
+        //Definir los arreglos
+        $errores = array();
+        $data = array();
+       
+       //Recibimos la informacion
+        if ($_SERVER['REQUEST_METHOD']=="POST"){
+          
+          $idProducto = isset($_POST['idProducto'])?$_POST['idProducto']:"";
+          $tipo = isset($_POST['tipo'])?$_POST['tipo']:"";
+          $nombre = isset($_POST['nombre'])?$_POST['nombre']:"";
+          $descripcion = isset($_POST['descripcion'])?$_POST['descripcion']:"";
+          $precio = isset($_POST['precio'])?$_POST['precio']:"";
+          $descuento = isset($_POST['descuento'])?$_POST['descuento']:"0";
+          $imagen = isset($_POST['imagen'])?$_POST['imagen']:"";
+          $fecha_lanzamiento = isset($_POST['fecha_lanzamiento'])?$_POST['fecha_lanzamiento']:"";
+          $nuevos = isset($_POST['nuevos'])?$_POST['nuevos']:"";
+          $status = isset($_POST['status'])?$_POST['status']:"";
+          $desarrolladora = isset($_POST['desarrolladora'])?$_POST['desarrolladora']:"";
+          $editor = isset($_POST['editor'])?$_POST['editor']:"";
+          
+          //Validamos la informacion
+          if(empty($nombre)){
+            array_push($errores,"El nombre es requerido.");
+          }
+        if($status=="void"){
+            array_push($errores,"Seleciona ele estatus del producto.");
+          }
 
-        //Leemos los status del Producto  
-        $statusProducto = $this->modelo->getLlaves("statusProducto");
+          if(empty($descripcion)){
+              array_push($errores,"La descripcion es requerida.");
+            }
+          if(empty($desarrolladora)){
+              array_push($errores,"La desarrolladora es requerida.");
+            }
 
-        //Leemos los datos del idProducto
+          if($precio < $descuento){
+              array_push($errores,"El descuento no puede ser mayor al producto");
+            }
+
+            //Cambiar el nombre del archivo
+            $imagen = $_POST['nombre'];
+            $imagen = strtolower($imagen.".jpg");
+
+            //Subir la imagen (archivo)
+            if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+              //Copiamos el archivo temporal
+              copy($_FILES['imagen']['tmp_name'],"img/".$imagen);
+            } else {
+              array_push($errores, "Error al subir el archivo imagen.");
+            }
+
+if(empty($errores)){}
+          //Creacion del arreglo de datos
+          $data = [ 
+              "idProducto" => $idProducto,
+              "tipo" => $tipo,
+              "nombre" =>$nombre,
+              "descripcion" =>$descripcion,
+              "precio" => $precio,
+              "descuento" => $descuento,
+              "imagen" => $imagen,
+              "fecha_lanzamiento" =>$fecha_lanzamiento,
+              "nuevos" => $nuevos,
+              "status" => $status,
+              "desarrolladora" => $desarrolladora,
+              "editor" => $editor         
+          ];
+         // Enviamos al modelo
+          $errores = $this->modelo->modificaProducto($data);
+
+          //validamos la modificacion
+          if(empty($errores)){
+            header("location:".RUTA."adminProductos");
+            
+          }
+        
+        }
+
+          //Leemos los datos del idProducto
         $data = $this->modelo->getProductoId($idProducto);
-        print_r($data);
+         //Leemos las llaves de tipo producto  
+         $llaves = $this->modelo->getLlaves("tipoProducto");
+         //Leemos status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
 
         $datos = [
           "titulo" => "Administrativo Productos Modificar",
           "subtitulo" => "Modificar un Producto",
           "menu" => false,
           "admin" => true,
-          "errores" => [],
           "tipoProducto" => $llaves,
           "statusProducto" => $statusProducto,
+          "errores" => $errores,
           "data" => $data
       ];
+      
+      $this->vista("adminProductosModificaVista",$datos);
 
-      $this->vista("adminProductosAltaVista",$datos);
-
-    }
+        }
 
     public function getNuevos()
     {

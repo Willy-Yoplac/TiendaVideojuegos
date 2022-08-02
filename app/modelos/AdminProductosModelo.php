@@ -28,8 +28,8 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
-    //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'"; 
+   
     $data = $this->db->querySelect($sql);
     return $data;
   }
@@ -51,10 +51,31 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    print_r( $data);
+ 
+    if (!empty($data["idProducto"])) {
+       $sql = "UPDATE productos SET "; 
+       $sql.= "tipo='".$data['tipo']."', ";           
+       $sql.= "nombre='".$data['nombre']."', ";          
+       $sql.= "descripcion='".$data['descripcion']."', ";     
+       $sql.= "precio=".$data['precio'].", ";               
+       $sql.= "descuento=".$data['descuento'].", ";             
+       $sql.= "imagen='".$data['imagen']."', ";          
+       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           
+       $sql.= "nuevos='".$data['nuevos']."', ";           
+       $sql.= "status='".$data['status']."', ";          
+       $sql.= "baja=0, ";                              
+       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           
+       $sql.= "editor='".$data['editor']."' ";      
+       $sql.= "WHERE idProducto=".$data['idProducto'];
+       
+       if(!$this->db->queryNoSelect($sql)){
+        array_push($errores,"Existe un error, que aun no descubro de donde proviene.");
+         
+    }
     
-    echo "Estoy en modificar productos";
+  }     
     return $errores;
+    
   }
 
   public function altaProducto($data){

@@ -1,15 +1,8 @@
 <?php include_once("encabezado.php");   ?>
-
-
-<h1 class="text-center"><?php
-  if (isset($datos["subtitulo"])) {
-    print $datos["subtitulo"];
-  }
-  ?></h1>
+<h1 class="text-center">Modificar un Porducto</h1>
 <div class="card p-4 bg-light">
-    <form action="<?php print RUTA; ?>adminProductos/alta/" method="POST"
-    enctype="multipart/form-data">
-    <!-- para indicar que vamos a subir archivos -->
+    <form action="<?php print RUTA; ?>adminProductos/cambio/" method="POST" enctype="multipart/form-data">
+
      <div class="form-group text-left"> 
         <label for="usuario">* Tipo del producto: </label>
         <select class="form-control" name="tipo" id="tipo">
@@ -27,6 +20,7 @@
             ?>
         </select>
      </div>
+
      <div class="form-group text-left">
         <label for="nombre">* Nombre del producto: </label>
         <input type="text" name="nombre" class="form-control"
@@ -36,6 +30,7 @@
         ?>"
         >
      </div>
+
      <div class="form-group text-left">
       <label for="content">* Descripción:</label>
       <input type="text" name="descripcion" class="form-control"
@@ -46,7 +41,7 @@
         >
     </div>
 
-     <div class="form-group text-left">
+    <div class="form-group text-left">
         <label for="desarrolladora">* Desarrolladora: </label>
         <input type="text" name="desarrolladora" class="form-control"
         placeholder="Escribe la desarrolladora" 
@@ -138,13 +133,8 @@
      </div>
 
      </div class="form-group text-left"><br>
+     <input type="hidden" id="idProducto" name="idProducto" value="<?php print $datos['data']['idProducto']; ?>"/>
      
-     <!-- Problemas -->
-    
-
-      <!-- ------------- -->
-     
-     <div>
         <input type="submit" value="Enviar" class="btn btn-success">
         <a href="<?php print RUTA; ?>adminProductos" class="btn btn-info">Regresar</a>
      </div>
