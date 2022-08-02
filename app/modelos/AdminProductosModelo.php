@@ -25,8 +25,8 @@ class AdminProductosModelo{
   }
 
   public function getLlaves($tipo){
-    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo."'"; 
-    //eliminé-> "'ORDER BY indice DESC"
+    $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'"; 
+   
     $data = $this->db->querySelect($sql);
     return $data;
   }
@@ -48,27 +48,45 @@ class AdminProductosModelo{
 
   public function modificaProducto($data){
     $errores = array();
-    print_r( $data);
+ 
+    if (!empty($data["idProducto"])) {
+       $sql = "UPDATE productos SET "; 
+       $sql.= "tipo='".$data['tipo']."', ";           
+       $sql.= "nombre='".$data['nombre']."', ";          
+       $sql.= "descripcion='".$data['descripcion']."', ";     
+       $sql.= "precio=".$data['precio'].", ";               
+       $sql.= "descuento=".$data['descuento'].", ";             
+       $sql.= "imagen='".$data['imagen']."', ";          
+       $sql.= "fecha_lanzamiento='".$data['fecha_lanzamiento']."', ";           
+       $sql.= "nuevos='".$data['nuevos']."', ";           
+       $sql.= "status='".$data['status']."', ";          
+       $sql.= "baja=0, ";                              
+       $sql.= "desarrolladora='".$data['desarrolladora']."', ";           
+       $sql.= "editor='".$data['editor']."' ";      
+       $sql.= "WHERE idProducto=".$data['idProducto'];
+       
+       if(!$this->db->queryNoSelect($sql)){
+        array_push($errores,"Existe un error, que aun no descubro de donde proviene.");
+         
+    }
     
-    echo "Estoy en modificar productos";
+  }     
     return $errores;
+    
   }
 
   public function altaProducto($data){
-    $sql = "INSERT INTO productos VALUES(0,"; //1. idProducto
-    $sql.= "'".$data['tipo']."', ";           //2. tipo
-   $sql.= "'".$data['nombre']."', ";          //3. nombre
-   $sql.= "'".$data['descripcion']."', ";     //4. descripcion
-   $sql.= $data['precio'].", ";               //5. precio
-   $sql.= $data['descuento'].", ";            //6. descuento 
-   
-   $sql.= "'".$data['imagen']."', ";          //8. imagen
-   $sql.= "'".$data['fecha_lanzamiento']."', ";           //9. fecha
-  
-   
-   $sql.= "'".$data['nuevos']."', ";           //14. nuevos
-   $sql.= "'".$data['status']."', ";          //15. status
-   $sql.= "0, ";                              //
+    $sql = "INSERT INTO productos VALUES(0,"; 
+    $sql.= "'".$data['tipo']."', ";          
+   $sql.= "'".$data['nombre']."', ";          
+   $sql.= "'".$data['descripcion']."', ";     
+   $sql.= $data['precio'].", ";               
+   $sql.= $data['descuento'].", ";           
+   $sql.= "'".$data['imagen']."', ";          
+   $sql.= "'".$data['fecha_lanzamiento']."', ";         
+   $sql.= "'".$data['nuevos']."', ";           
+   $sql.= "'".$data['status']."', ";          
+   $sql.= "0, ";                            
    
    $sql.= "'".$data['desarrolladora']."', ";           //
    $sql.= "'".$data['editor']."')";       //
