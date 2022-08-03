@@ -18,7 +18,11 @@
 			print "<td class='text-left'>".$datos["data"][$i]["idProducto"]."</td>";
 			print "<td class='text-left'>".$datos["tipoProducto"][$tipo]['cadena']."</td>";
 			print "<td class='text-left'>".$datos["data"][$i]["nombre"]."</td>";
-            print "<td class='text-left'>".$datos["data"][$i]["descripcion"]."</td>";
+            print "<td class='text-left'>".substr(html_entity_decode($datos["data"][$i]["descripcion"]),0,60);
+            if(strlen($datos["data"][$i]["descripcion"])>60){
+				print "...";
+			}
+            print "</td>";
 
             //
 			print "<td><a href='".RUTA."adminProductos/cambio/".$datos["data"][$i]["idProducto"]."' class='btn btn-info'>Modificar</a></td>";

@@ -145,16 +145,7 @@
       <!-- ------------- -->
      
      <div>
-        <input type="hidden" name="idProducto" id="idProducto" value="
-
-        <?php
-            if (isset($datos['data']['idProducto'])) {
-                print $datos['data']['idProducto'];
-            } else {
-                print "";
-            }
-        ?>
-        ">
+        
         <input type="submit" value="Enviar" class="btn btn-success">
         <a href="<?php print RUTA; ?>adminProductos" class="btn btn-info">Regresar</a>
      </div>

@@ -97,10 +97,19 @@ class AdminProductosModelo{
   }
   public function getNuevos()
   {
-    $sql = "SELECT * FROM productos WHERE nuevos=0 AND baja=0 LIMIT 2 ";
+    $sql = "SELECT * FROM productos WHERE nuevos=0 AND baja=0 LIMIT 8 ";
     $data = $this->db->querySelect($sql);
     return $data;
   }
+
+  public function getNuevos1()
+  {
+    $sql = "SELECT * FROM productos WHERE nuevos='o' AND baja=0 LIMIT 8 ";
+    $data = $this->db->querySelect($sql);
+    return $data;
+  }
+
+
 }
 
 ?>

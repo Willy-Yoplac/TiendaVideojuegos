@@ -15,10 +15,14 @@ class Tienda extends Controlador {
             //Leer los productos nuevos
             $data = $this->getNuevos();
 
+            $nuevos = $this->getNuevos1();
+
+
     		$datos = [
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
-                "activo" => "aventura",
+                "nuevos" => $nuevos,
+                //"activo" => "aventura",
                 "menu" =>true
             ];
         $this->vista("tiendaVista", $datos);  
@@ -43,6 +47,15 @@ class Tienda extends Controlador {
         require_once "AdminProductos.php";
         $productos = new AdminProductos();
         $data = $productos->getNuevos();
+        unset($productos); //opcional
+        return $data;
+    }
+
+    public function getNuevos1(){
+        $data = array();
+        require_once "AdminProductos.php";
+        $productos = new AdminProductos();
+        $data = $productos->getNuevos1();
         unset($productos); //opcional
         return $data;
     }

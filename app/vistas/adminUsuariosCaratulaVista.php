@@ -1,5 +1,5 @@
 <?php include_once("encabezado.php"); ?>
-<h1 class="text-center">Lista de Usuarios</h1>
+<h1 class="text-center">Lista de Administradores</h1>
 <div class="card p-4 bg-light">
 	<table class="table table-striped" width="100%">
 	<thead>

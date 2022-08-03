@@ -136,6 +136,7 @@ class AdminProductos extends Controlador{
         "statusProducto" => $statusProducto,
         "data" => $data
     ];
+    var_dump($data);
     
     $this->vista("adminProductosAltaVista",$datos);
     }
@@ -240,7 +241,7 @@ if(empty($errores)){}
           "admin" => true,
           "tipoProducto" => $llaves,
           "statusProducto" => $statusProducto,
-          "errores" => $errores,
+          "errores" => [],
           "data" => $data
       ];
       
@@ -251,6 +252,30 @@ if(empty($errores)){}
     public function getNuevos()
     {
       return $this->modelo->getNuevos();
+    }
+
+    public function getNuevos1()
+    {
+      return $this->modelo->getNuevos1();
+    }
+
+    public function producto($idProducto='')
+    {
+      //Leemos los datos del registro del IDProducto
+      $data = $this->modelo->getProductoId($idProducto);
+      //
+      //Llamamos a la vista del producto
+      //
+      $datos = [
+          "titulo" => "Productos",
+          "subtitulo" => $data["nombre"],
+          "menu" => true,
+          "admin" => false,
+          "errores" => [],
+          "data" => $data
+      ];
+      
+      $this->vista("productoVista",$datos);
     }
 }
 
