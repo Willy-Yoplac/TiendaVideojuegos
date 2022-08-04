@@ -115,11 +115,7 @@ class AdminProductos extends Controlador{
                 if ($this->modelo->altaProducto($data)) {
                   header("location:".RUTA."adminProductos");
                 }
-              // } else {
-              //   //Modificacion
-              //   if ($this->modelo->modificaProducto($data)) {
-              //     header("location:".RUTA."adminProductos");
-              //   }
+              
                }
               
             }
@@ -143,7 +139,43 @@ class AdminProductos extends Controlador{
 
     //ELIMINAR
     public function baja($idProducto=""){
-        # code...
+        //Definir los arreglos
+        $errores = array();
+        $data = array();
+       
+       //Recibimos la informacion
+        if ($_SERVER['REQUEST_METHOD']=="POST"){
+          $idProducto = isset($_POST['idProducto'])?$_POST['idProducto']:"";
+
+          if(!empty($idProducto)){
+            $errores = $this->modelo->bajaLogica($idProducto);
+            //Si no hay errores regresamos
+            if(empty($errores)){
+              header("location:".RUTA."adminProductos");
+              
+            }
+          }
+        }
+
+        //Leemos los datos del idProducto
+        $data = $this->modelo->getProductoId($idProducto);
+         //Leemos las llaves de tipo producto  
+         $llaves = $this->modelo->getLlaves("tipoProducto");
+         //Leemos status del Producto  
+        $statusProducto = $this->modelo->getLlaves("statusProducto");
+
+        //Abrir la vista
+        $datos = [
+          "titulo" => "Administrativo Productos Eliminar",
+         
+          "menu" => false,
+          "admin" => true,
+          "tipoProducto" => $llaves,
+          "statusProducto" => $statusProducto,
+          "errores" => $errores,
+          "data" => $data
+      ];
+      $this->vista("adminProductosBorraVista",$datos);
     }
 
     //ACTUALIZAR 
@@ -227,7 +259,7 @@ if(empty($errores)){}
         
         }
 
-          //Leemos los datos del idProducto
+        //Leemos los datos del idProducto
         $data = $this->modelo->getProductoId($idProducto);
          //Leemos las llaves de tipo producto  
          $llaves = $this->modelo->getLlaves("tipoProducto");
@@ -241,7 +273,7 @@ if(empty($errores)){}
           "admin" => true,
           "tipoProducto" => $llaves,
           "statusProducto" => $statusProducto,
-          "errores" => [],
+          "errores" => $errores,
           "data" => $data
       ];
       
@@ -254,10 +286,6 @@ if(empty($errores)){}
       return $this->modelo->getNuevos();
     }
 
-    public function getNuevos1()
-    {
-      return $this->modelo->getNuevos1();
-    }
 
     public function producto($idProducto='')
     {
@@ -271,7 +299,7 @@ if(empty($errores)){}
           "subtitulo" => $data["nombre"],
           "menu" => true,
           "admin" => false,
-          "errores" => [],
+          "errores" => $errores,
           "data" => $data
       ];
       

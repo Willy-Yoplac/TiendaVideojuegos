@@ -109,7 +109,6 @@ class AdminProductosModelo{
     return $data;
   }
 
-
 }
 
 ?>
