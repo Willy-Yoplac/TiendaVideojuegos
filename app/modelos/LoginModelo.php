@@ -78,7 +78,7 @@ class LoginModelo{
         //r retorno de carro y n nueva linea  
         $headers .= "Content-type:text/html; charset=UTF-8\r\n"; 
         $headers .= "From: Zona-Games\r\n"; 
-        $headers .= "Repaly-to: willy.yoplac@unmsm.edu.pe\r\n";
+        $headers .= "Replay-to: willy.yoplac@unmsm.edu.pe\r\n";
 
         $asunto = "Cambiar clave de acceso";
 

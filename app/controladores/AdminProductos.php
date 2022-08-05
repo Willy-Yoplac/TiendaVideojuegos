@@ -259,7 +259,7 @@ if(empty($errores)){}
       return $this->modelo->getNuevos1();
     }
 
-    public function producto($idProducto='')
+    public function producto($idProducto='',$regresa='')
     {
       //Leemos los datos del registro del IDProducto
       $data = $this->modelo->getProductoId($idProducto);
@@ -271,6 +271,7 @@ if(empty($errores)){}
           "subtitulo" => $data["nombre"],
           "menu" => true,
           "admin" => false,
+          "regresa" => $regresa,
           "errores" => [],
           "data" => $data
       ];

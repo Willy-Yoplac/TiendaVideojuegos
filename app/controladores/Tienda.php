@@ -1,6 +1,6 @@
 <?php
 /*
-Controlador Login
+Controlador Tienda
  */
 class Tienda extends Controlador {
     private $modelo;

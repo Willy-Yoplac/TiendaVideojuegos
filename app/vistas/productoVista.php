@@ -31,7 +31,7 @@ if ($datos["data"]["tipo"]==1) {
 	print "<h4>Precio:</h4>";
 	print "<p>$".number_format($datos["data"]["precio"],2)."</p>";
 }
-
-print "<a href='".RUTA."tienda' class='btn btn-success'/>Regresa</a>";
+$regresa = ($datos["regresa"]=="")? "tienda" : $datos["regresa"];
+print "<a href='".RUTA.$regresa."' class='btn btn-success'/>Regresa</a>";
 
 include_once("piepagina.php"); ?>
