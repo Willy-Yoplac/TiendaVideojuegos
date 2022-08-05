@@ -286,6 +286,11 @@ if(empty($errores)){}
       return $this->modelo->getNuevos();
     }
 
+    public function getNuevos1()
+    {
+      return $this->modelo->getNuevos1();
+    }
+
 
     public function producto($idProducto='',$regresa='')
     {
@@ -300,7 +305,7 @@ if(empty($errores)){}
           "menu" => true,
           "admin" => false,
           "regresa" => $regresa,
-          "errores" => $errores,
+          "errores" => [],
           "data" => $data
       ];
       
