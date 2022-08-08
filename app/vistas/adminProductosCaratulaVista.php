@@ -18,7 +18,7 @@
 			print "<td class='text-left'>".$datos["data"][$i]["idProducto"]."</td>";
 			print "<td class='text-left'>".$datos["tipoProducto"][$tipo]['cadena']."</td>";
 			print "<td class='text-left'>".$datos["data"][$i]["nombre"]."</td>";
-            print "<td class='text-left'>".substr(html_entity_decode($datos["data"][$i]["descripcion"]),0,60);
+            print "<td class='text-left'>".substr(html_entity_decode($datos["data"][$i]["descripcion"]),0,80);
             if(strlen($datos["data"][$i]["descripcion"])>60){
 				print "...";
 			}

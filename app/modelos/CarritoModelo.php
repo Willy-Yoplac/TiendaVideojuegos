@@ -7,8 +7,7 @@ class CarritoModelo{
     function __construct(){
         $this->db = new MySQLdb();
     }
-<<<<<<< HEAD
-=======
+
 
     public function verificaProducto($producto_id, $usuario_id)
     {
@@ -33,6 +32,6 @@ class CarritoModelo{
 
     	return $this->db->queryNoSelect($sql);
     }
->>>>>>> 2doAvance
+
 }
 ?>

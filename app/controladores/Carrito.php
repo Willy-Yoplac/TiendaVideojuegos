@@ -12,6 +12,7 @@ class Carrito extends Controlador {
     	$sesion = new Sesion();
     	if ($sesion->getLogin()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     		//
             //Leer los productos nuevos
            // $data = $this->getNuevos();
@@ -19,6 +20,8 @@ class Carrito extends Controlador {
             //$nuevos = $this->getNuevos1();
 
 =======
+=======
+>>>>>>> 2doAvance
     		
             //Leer los productos que NO son nuevos
             //$data = $this->getNuevos();
@@ -26,13 +29,19 @@ class Carrito extends Controlador {
             //$nuevos = $this->getNuevos1();
 
 
+<<<<<<< HEAD
+>>>>>>> 2doAvance
+=======
 >>>>>>> 2doAvance
     		$datos = [
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
                 "nuevos" => $nuevos,
 <<<<<<< HEAD
+<<<<<<< HEAD
                 //"activo" => "aventura",
+=======
+>>>>>>> 2doAvance
 =======
 >>>>>>> 2doAvance
                 "menu" =>true
@@ -40,6 +49,7 @@ class Carrito extends Controlador {
         $this->vista("tiendaVista", $datos);  
     	} else {
     		header("location:".RUTA);
+<<<<<<< HEAD
 <<<<<<< HEAD
     	}
     	
@@ -53,6 +63,8 @@ class Carrito extends Controlador {
 
     
 =======
+=======
+>>>>>>> 2doAvance
     	}	
     }
 
@@ -69,6 +81,9 @@ class Carrito extends Controlador {
 
     //Caratula
     //this->caratula();    
+<<<<<<< HEAD
+>>>>>>> 2doAvance
+=======
 >>>>>>> 2doAvance
 }
 

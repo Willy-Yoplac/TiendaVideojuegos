@@ -1,6 +1,6 @@
 <?php
 /*
-Controlador Login
+Controlador Tienda
  */
 class Tienda extends Controlador {
     private $modelo;
@@ -11,10 +11,10 @@ class Tienda extends Controlador {
     function caratula(){
     	$sesion = new Sesion();
     	if ($sesion->getLogin()) {
-    		//
-            //Leer los productos nuevos
+    		
+            //Leer los productos que NO son nuevos
             $data = $this->getNuevos();
-
+            //Leer los productos que SI son nuevos
             $nuevos = $this->getNuevos1();
 
 
@@ -22,15 +22,12 @@ class Tienda extends Controlador {
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
                 "nuevos" => $nuevos,
-                //"activo" => "aventura",
                 "menu" =>true
             ];
         $this->vista("tiendaVista", $datos);  
     	} else {
     		header("location:".RUTA);
-    	}
-    	
-         
+    	}	
     }
 
     function logout(){
@@ -47,7 +44,7 @@ class Tienda extends Controlador {
         require_once "AdminProductos.php";
         $productos = new AdminProductos();
         $data = $productos->getNuevos();
-        unset($productos); //opcional
+        unset($productos);
         return $data;
     }
 
@@ -56,7 +53,7 @@ class Tienda extends Controlador {
         require_once "AdminProductos.php";
         $productos = new AdminProductos();
         $data = $productos->getNuevos1();
-        unset($productos); //opcional
+        unset($productos);
         return $data;
     }
 }

@@ -286,20 +286,29 @@ if(empty($errores)){}
       return $this->modelo->getNuevos();
     }
 
+    public function getNuevos1()
+    {
+      return $this->modelo->getNuevos1();
+    }
 
-    public function producto($idProducto='')
+
+    public function producto($idProducto='',$regresa='')
     {
       //Leemos los datos del registro del IDProducto
       $data = $this->modelo->getProductoId($idProducto);
       //
-      //Llamamos a la vista del producto
+      //Enviamos el id del usuario
+      $sesion = new Sesion();
+      $idUsuario = $_SESSION["usuario"]["idUsuarios"];
       //
       $datos = [
           "titulo" => "Productos",
           "subtitulo" => $data["nombre"],
           "menu" => true,
           "admin" => false,
-          "errores" => $errores,
+          "regresa" => $regresa,
+          "idUsuarios" => $idUsuario,
+          "errores" => [],
           "data" => $data
       ];
       

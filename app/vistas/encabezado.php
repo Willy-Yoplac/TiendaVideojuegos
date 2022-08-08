@@ -20,7 +20,7 @@ crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a href="<?php print RUTA; ?>" class="navbar-brand">Tienda Zona-Games</a>
+        <a href="<?php print RUTA."tienda"; ?>" class="navbar-brand">Tienda Zona-Games</a>
         <div class="collapse navbar-collapse" id="menu">
         <?php if ($datos["menu"]){
            
@@ -32,31 +32,43 @@ crossorigin="anonymous"></script>
             print "</li>";
 
             print "<li class='nav-item'>";
-            print "<a href='".RUTA."deportes' class='nav-link";
+            print "<a href='".RUTA."deportes' class='nav-link ";
             if(isset($datos["activo"]) && $datos["activo"]=="deportes") print "active";
-            print ">Deportes</a>";
+            print "'>Deportes</a>";
             print "</li>";
 
             print "<li class='nav-item'>";
-            print "<a href='".RUTA."sobreNosotros' class='nav-link";
+            print "<a href='".RUTA."sobrenosotros' class='nav-link ";
             if(isset($datos["activo"]) && $datos["activo"]=="sobrenosotros") print "active";
             print "'>Sobre Nosotros</a>";
             print "</li>";
 
             print "<li class='nav-item'>";
-            print "<a href='".RUTA."contacto' class='nav-link";
+            print "<a href='".RUTA."contacto' class='nav-link ";
             if(isset($datos["activo"]) && $datos["activo"]=="contacto") print "active";
             print "'>Contacto</a>";
-            print "</li>";
             print "</ul>";
 
             // Derecha -> Salir
-            print "<ul class='nav navbar-nav navbar-right'>";
+            print "<ul class='nav navbar-nav mr-auto mt-2 mt-lg-0 navbar-right'>";
             //
             print "<li class='nav-item'>";
             print "<a href='".RUTA."tienda/logout' class='nav-link'>Logout</a>";
             print "</li>";
             print "</ul>";
+
+            print "<ul class='nav navbar-nav navbar-right'>";
+            //
+            print "<li class='nav-item'>";
+            print "</li>";
+            ?>
+            <form action="<?php print RUTA; ?>buscar/producto" class="form-inline" method="POST">Buscar:
+                <input type="text" name="buscar" id="buscar" class="form-control" size="20" placeholder="Buscar un producto">
+                <button type="submit" class="btn btn-success">Buscar</button>
+            </form>
+            <?php
+            print "</ul>";
+            //
         }
         
         if(isset($datos["admin"])){

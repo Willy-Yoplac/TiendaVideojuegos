@@ -95,6 +95,7 @@ class AdminProductosModelo{
    
    return $this->db->queryNoSelect($sql);
   }
+  
   public function getNuevos()
   {
     $sql = "SELECT * FROM productos WHERE nuevos=0 AND baja=0 LIMIT 8 ";
