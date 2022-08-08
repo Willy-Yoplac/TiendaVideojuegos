@@ -1,0 +1,17 @@
+<?php
+/*Aventura Modelo
+ */
+class AventuraModelo{
+    private $db;
+
+    function __construct(){
+        $this->db = new MySQLdb();
+    }
+
+    public function getAventura(){
+    $sql = "SELECT * FROM productos WHERE baja=0 AND tipo=1";
+    $data = $this->db->querySelect($sql);
+    return $data;
+  	}
+}
+?>
