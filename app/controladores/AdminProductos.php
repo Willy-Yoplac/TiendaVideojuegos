@@ -297,7 +297,9 @@ if(empty($errores)){}
       //Leemos los datos del registro del IDProducto
       $data = $this->modelo->getProductoId($idProducto);
       //
-      //Llamamos a la vista del producto
+      //Enviamos el id del usuario
+      $sesion = new Sesion();
+      $idUsuario = $_SESSION["usuario"]["idUsuarios"];
       //
       $datos = [
           "titulo" => "Productos",
@@ -305,6 +307,7 @@ if(empty($errores)){}
           "menu" => true,
           "admin" => false,
           "regresa" => $regresa,
+          "idUsuarios" => $idUsuario,
           "errores" => [],
           "data" => $data
       ];
