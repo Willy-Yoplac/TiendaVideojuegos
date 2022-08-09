@@ -12,19 +12,21 @@ class Carrito extends Controlador {
     	$sesion = new Sesion();
     	if ($sesion->getLogin()) {
     		
-            //Leer los productos que NO son nuevos
-            //$data = $this->getNuevos();
-            //Leer los productos que SI son nuevos
-            //$nuevos = $this->getNuevos1();
+            //Recuperamos el id del usuario
+
+            $usuario_id = $_SESSION["usuario"]["idUsuarios"]; //o usuarios
+            //Leer los productos del carrito
+            $data = $this->modelo->getCarrito($usuario_id);
+            //var_dump($data);
 
 
     		$datos = [
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
-                "nuevos" => $nuevos,
+                "usuario_id" => $usuario_id,
                 "menu" =>true
             ];
-        $this->vista("tiendaVista", $datos);  
+        $this->vista("carritoVista", $datos);  
     	} else {
     		header("location:".RUTA);
     	}	
@@ -39,10 +41,11 @@ class Carrito extends Controlador {
                 array_push($errores, "Error al insertar el producto al carrito");
             }
         }
+    //Caratula
+    $this->caratula();
     }
 
-    //Caratula
-    //this->caratula();    
+        
 }
 
 ?>
