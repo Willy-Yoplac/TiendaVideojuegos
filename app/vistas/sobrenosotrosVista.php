@@ -5,6 +5,9 @@ print "<div class='alert mt-3'>";
 //print "<img src='img/foto.jpg' class='rounded float-right'/>"; 
 print "<p>Esta tienda virtual fue realizada por Ruben Gallardo y Willy Yoplac, estudiantes de Computación Científica de la Universidad Nacional Mayor de San Marcos (UNMSM), siendo nuestro proyecto para el curso de Base de datos e Ingeniería de Software.</p>";
 print "<p>Esperamos que les guste.</p>";
+print "<p>Si deseas contactarnos puedes escribirnos a nuestros correos: <br> willy.yoplac@unmsm.edu.pe <br>  ruben.gallardo2@unmsm.edu.pe</p>";
+print "<p>Puedes encontrar nuestro código en GitHub:</p>";
+print "<a href='https://github.com/Willy-Yoplac/TiendaVirtual'>GitHub</a>";
 print "</div>";
 print "<a href='".RUTA."tienda' class='btn btn-success'/>Regresar</a>";
 
