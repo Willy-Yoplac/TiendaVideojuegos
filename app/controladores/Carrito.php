@@ -58,10 +58,19 @@ class Carrito extends Controlador {
                    if (!$this->modelo->actualiza($usuario_id, $producto_id, $cantidad)) {
                        array_push($errores, "Error al actualizar el producoto ".$producto_id);
                    }
-               }
-               $this->caratula($errores);
-           }
-       }   
+            }
+            $this->caratula($errores);
+        }
+    }
+
+    public function borrar($producto_id, $usuario_id)
+    {
+        $errores = array();
+        if (!$this->modelo->borrar($producto_id, $usuario_id)) {
+            array_push($errores, "Error en el registro del carrito");
+        }
+        $this->caratula($errores);
+    }  
 }
 
 ?>
