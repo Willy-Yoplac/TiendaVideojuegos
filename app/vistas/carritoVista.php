@@ -84,9 +84,9 @@ print "<tr>";
 print "<td><a href='".RUTA."tienda' class='btn btn-info' role='button'>Seguir comprando</a></td>";
 print "<td><input type='submit' class='btn btn-info' role='button' value='Recalcular'/></td>";
 if($verifica){
-  print "<td><a href='".RUTA."gracias' class='btn btn-success' role='button'>Pagar</a></td>";
+  print "<td><a href='".RUTA."carrito/gracias' class='btn btn-success' role='button'>Pagar</a></td>";
 } else {
-  print "<td><a href='".RUTA."checkout' class='btn btn-success' role='button'>Pagar</a></td>";
+  print "<td><a href='".RUTA."carrito/checkout' class='btn btn-success' role='button'>Pagar</a></td>";
 }
 print "</tr>";
 print "</table>";

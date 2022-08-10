@@ -70,6 +70,20 @@ class Carrito extends Controlador {
         }
         $this->caratula($errores);
     }  
+
+    public function checkout()
+    {
+        $sesion = new Sesion();
+        if(!$sesion->getLogin()){
+
+        }else{
+            $datos = [
+                "titulo" => "Carrito | checkout",
+                "menu" => true
+            ];
+            $this->vista("checkoutVista", $datos);
+        }
+    }
 }
 
 ?>
