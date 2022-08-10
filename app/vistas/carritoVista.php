@@ -1,13 +1,12 @@
-<?php include_once("encabezado.php"); 
+<?php include_once("encabezado.php");
 
 //Variables de trabajo
 $verifica = false;
 $subtotal = 0;
-
 $descuento = 0;
-$usuario_id = $datos["usuario_id"]; //posible error
+$usuario_id = $datos["usuario_id"];
 
-//
+
 print "<h2 class='text-center'>Carrito de compras</h2>";
 print "<form action='".RUTA."carrito/actualiza' method='POST'>";
 print "<table class='table table-strped' width='100%'>";
@@ -22,81 +21,76 @@ print "<th width='6.5%'>Borrar</th>";
 print "</tr>";
 //ciclo
 for ($i=0; $i < count($datos["data"]); $i++) { 
-    //Variables de trabajo
-    $desc = "<b>".$datos["data"][$i]["nombre"]."</b>";
-    $desc.= substr(html_entity_decode($datos["data"][$i]["descripcion"]),0,200);
-    $nom = $datos["data"][$i]["nombre"];
-    $num = $datos["data"][$i]["producto"];
-    $can = $datos["data"][$i]["cantidad"];
-    $pre = $datos["data"][$i]["precio"];
-    $img = $datos["data"][$i]["imagen"];
-    $des = $datos["data"][$i]["descuento"];
-    
-    $tot = $can*$pre;
-    //
-    print "<tr>";
-    print "<td><img src='".RUTA."img/".$img."' width='105' alt'".$nom."'></td>";
-    print "<td>".$desc."..</td>";
-    print "<td class='text-right'>";
-    print "<input type='number' name='c".$i."' class='text-right' ";
-    print "value='".number_format($can,0)."' min='1' max='99'/>";
-    print "<input type='hidden' name='i".$i."' value='".$num."'/>";
-    print "</td>";
-    print "<td class='text-right'>S/".number_format($pre,2)."</td>";
-    print "<td class='text-right'>S/".number_format($tot,2)."</td>";
-    print "<td>&nbsp;</td>";
-    print "<td class='text-right'><a href='".RUTA."carrito/borrar/";
-    print $num."/".$usuario_id."' class='btn btn-danger'>Borrar</a>";
-    print "</tr>";
 
-    //sumamos los subtotales
-    $subtotal += $tot;
-    $descuento += $des;
-    
-  }
-  //Totales
-  $total = $subtotal  - $descuento;
-  $total = $subtotal  - $descuento;
-  print "<input type='hidden' name='num' value='".$i."'/>";
-  print "<input type='hidden' name='idUsuario' value='".$datos["usuario_id"]."'/>";
-  print "</table>";
-  print "<hr>";
-
-  //Tabla de totales
-  print "<table width='100%' class='text-right'>";
+  //Variables de trabajo
+  $desc = "<b>".$datos["data"][$i]["nombre"]."</b>";
+  $desc.= substr(html_entity_decode($datos["data"][$i]["descripcion"]),0,200);
+  $nom = $datos["data"][$i]["nombre"];
+  $num = $datos["data"][$i]["producto"];
+  $can = $datos["data"][$i]["cantidad"];
+  $pre = $datos["data"][$i]["precio"];
+  $img = $datos["data"][$i]["imagen"];
+  $des = $datos["data"][$i]["descuento"];
+  $tot = $can*$pre;
+  //
   print "<tr>";
-  print "<td width='79.85%'></td>";
-  print "<td width='11.55%'>Subtotal:</td>";
-  print "<td width='9.20%'>S/".number_format($subtotal,2)."</td>";
+  print "<td><img src='".RUTA."img/".$img."' width='105' alt'".$nom."'></td>";
+  print "<td>".$desc."..</td>";
+  print "<td class='text-right'>";
+  print "<input type='number' name='c".$i."' class='text-right' ";
+  print "value='".number_format($can,0)."' min='1' max='99'/>";
+  print "<input type='hidden' name='i".$i."' value='".$num."'/>";
+  print "</td>";
+  print "<td class='text-right'>$".number_format($pre,2)."</td>";
+  print "<td class='text-right'>$".number_format($tot,2)."</td>";
+  print "<td>&nbsp;</td>";
+  print "<td class='text-right'><a href='".RUTA."carrito/borrar/";
+  print $num."/".$usuario_id."' class='btn btn-danger'>Borrar</a>";
   print "</tr>";
 
-  //Descuento
-  print "<tr>";
-  print "<td width='79.85%'></td>";
-  print "<td width='11.55%'>Descuento:</td>";
-  print "<td width='9.20%'>S/".number_format($descuento,2)."</td>";
-  print "</tr>";
+  //Sumamos totales
 
-  //Total
-  print "<tr>";
-  print "<td width='79.85%'></td>";
-  print "<td width='11.55%'>Total:</td>";
-  print "<td width='9.20%'>S/".number_format($total,2)."</td>";
-  print "</tr>";
+  $subtotal += $tot;
+  $descuento += $des;
+}
+$total = $subtotal - $descuento;
+print "<input type='hidden' name='num' value='".$i."'/>";
+print "<input type='hidden' name='usuario_id' value='".$datos["usuario_id"]."'/>";
+print "</table>";
+print "<hr>";
 
-  //Botones
-  print "<tr>";
-  print "<td><a href='".RUTA."tienda' class='btn btn-info' role='button'>Seguir comprando</a></td>";
-  print "<td><input type='submit' class='btn btn-info' role='button' value='Recalcular'/></td>";
+//Tabla de totales
 
-  if($verifica){
-    print "<td><a href='".RUTA."gracias' class='btn btn-success' role='button'>Pagar comprando</a></td>";
-  } else {
-    print "<td><a href='".RUTA."checkout' class='btn btn-success' role='button'>Pagar comprando</a></td>";
-  }
-  print "</tr>";
+print "<table width='100%' class='text-right'>";
+print "<tr>";
+print "<td width='79.85%'></td>";
+print "<td width='11.55%'>Subtotal:</td>";
+print "<td width='9.20%'>$".number_format($subtotal,2)."</td>";
+print "</tr>";
 
-  print "</table>";
-  print "</form>";
-  
- include_once("piepagina.php");   ?>
+print "<tr>";
+print "<td width='79.85%'></td>";
+print "<td width='11.55%'>Descuento:</td>";
+print "<td width='9.20%'>$".number_format($descuento,2)."</td>";
+print "</tr>";
+
+print "<tr>";
+print "<td width='79.85%'></td>";
+print "<td width='11.55%'>Total:</td>";
+print "<td width='9.20%'>$".number_format($total,2)."</td>";
+print "</tr>";
+
+print "<tr>";
+print "<td><a href='".RUTA."tienda' class='btn btn-info' role='button'>Seguir comprando</a></td>";
+print "<td><input type='submit' class='btn btn-info' role='button' value='Recalcular'/></td>";
+if($verifica){
+  print "<td><a href='".RUTA."gracias' class='btn btn-success' role='button'>Pagar</a></td>";
+} else {
+  print "<td><a href='".RUTA."checkout' class='btn btn-success' role='button'>Pagar</a></td>";
+}
+print "</tr>";
+print "</table>";
+print "</form>";
+
+include_once("piepagina.php");   ?>
+

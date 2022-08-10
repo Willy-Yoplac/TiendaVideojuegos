@@ -8,22 +8,24 @@ class Carrito extends Controlador {
         $this->modelo = $this->modelo("CarritoModelo");     
     }
 
-    function caratula(){
+    function caratula($errores=[]){
     	$sesion = new Sesion();
     	if ($sesion->getLogin()) {
     		
             //Recuperamos el id del usuario
 
-            $usuario_id = $_SESSION["usuario"]["idUsuarios"]; //o usuarios
-            //Leer los productos del carrito
-            $data = $this->modelo->getCarrito($usuario_id);
-            //var_dump($data);
 
+            $usuario_id = $_SESSION["usuario"]["idUsuarios"];
+
+            //Leer los productos del carrito
+
+            $data = $this->modelo->getCarrito($usuario_id);
 
     		$datos = [
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
                 "usuario_id" => $usuario_id,
+                "errores" => $errores,
                 "menu" =>true
             ];
         $this->vista("carritoVista", $datos);  
@@ -41,11 +43,31 @@ class Carrito extends Controlador {
                 array_push($errores, "Error al insertar el producto al carrito");
             }
         }
-    //Caratula
-    $this->caratula();
+
+    $this->caratula($errores);
     }
 
-        
+        //Caratula
+       // $this->caratula($errores); 
+    
+
+    public function actualiza()
+       {
+           if (isset($_POST["num"]) && isset($_POST["usuario_id"])) {
+               $errores = array();
+               $num = $_POST["num"];
+               $usuario_id = $_POST["usuario_id"];
+               for ($i=0; $i < $num ; $i++) { 
+                   $producto_id = $_POST["i".$i];
+                   $cantidad = $_POST["c".$i];
+                   if (!$this->modelo->actualiza($usuario_id, $producto_id, $cantidad)) {
+                       array_push($errores, "Error al actualizar el producoto ".$producto_id);
+                   }
+               }
+               $this->caratula($errores);
+           }
+       }   
+
 }
 
 ?>

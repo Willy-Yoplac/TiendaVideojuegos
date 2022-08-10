@@ -33,26 +33,33 @@ class CarritoModelo{
     	return $this->db->queryNoSelect($sql);
     }
 
-	public function getCarrito($usuario_id)
-	{
-		$sql = "SELECT c.usuario_id as usuario, ";
-		$sql.= "c.producto_id as producto, ";
-		$sql.= "c.cantidad as cantidad, ";
-		$sql.= "c.descuento as descuento, ";
-		$sql.= "p.precio as precio, ";
-		$sql.= "p.imagen as imagen, ";
-		$sql.= "p.descripcion as descripcion, ";
-		$sql.= "p.nombre as nombre ";
-		$sql.= "FROM carrito as c, productos as p ";
-		$sql.= "WHERE usuario_id='".$usuario_id."' AND ";
-		$sql.= "estado=0 AND ";
-		$sql.= "c.producto_id=p.idProducto"; //id del producto
+    public function getCarrito($usuario_id)
+    {
+    	$sql = "SELECT c.usuario_id as usuario, ";
+    	$sql.= "c.producto_id as producto, ";
+    	$sql.= "c.cantidad as cantidad, ";
+    	$sql.= "c.producto_id as producto, ";
+    	$sql.= "c.descuento as descuento, ";
+    	$sql.= "p.precio as precio, ";
+    	$sql.= "p.imagen as imagen, ";
+    	$sql.= "p.descripcion as descripcion, ";
+    	$sql.= "p.nombre as nombre ";
+    	$sql.= "FROM carrito as c, productos as p ";
+    	$sql.= "WHERE usuario_id='".$usuario_id."' AND ";
+    	$sql.= "estado=0 AND ";
+    	$sql.= "c.producto_id=p.idProducto";
 
-		//print $sql;
-    //
-    return $this->db->querySelect($sql);
-		
-	}
+    	return $this->db->querySelect($sql);
+    }
+
+    public function actualiza($usuario_id, $producto_id, $cantidad)
+    {
+    	$sql = "UPDATE carrito ";
+    	$sql.= "SET cantidad=".$cantidad." ";
+    	$sql.= "WHERE usuario_id=".$usuario_id." AND ";
+    	$sql.= "producto_id=".$producto_id;
+    	return $this->db->queryNoSelect($sql);
+    }
 
 }
 ?>
