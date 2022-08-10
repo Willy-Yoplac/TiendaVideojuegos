@@ -13,8 +13,6 @@ class Carrito extends Controlador {
     	if ($sesion->getLogin()) {
     		
             //Recuperamos el id del usuario
-
-
             $usuario_id = $_SESSION["usuario"]["idUsuarios"];
 
             //Leer los productos del carrito
@@ -47,10 +45,6 @@ class Carrito extends Controlador {
     $this->caratula($errores);
     }
 
-        //Caratula
-       // $this->caratula($errores); 
-    
-
     public function actualiza()
        {
            if (isset($_POST["num"]) && isset($_POST["usuario_id"])) {
@@ -68,6 +62,14 @@ class Carrito extends Controlador {
            }
        }   
 
+    public function borrar($producto_id, $usuario_id)
+    {
+        $errores = array();
+        if (!$this->modelo->borrar($producto_id, $usuario_id)) {
+            array_push($errores, "Error en el registro del carrito");
+        }
+        $this->caratula($errores);
+    }  
 }
 
 ?>
