@@ -74,7 +74,17 @@ class Carrito extends Controlador {
     public function checkout()
     {
         $sesion = new Sesion();
-        if(!$sesion->getLogin()){
+        if($sesion->getLogin()){
+            //
+            $data = $_SESSION["usuario"];
+            //
+            $datos = [
+                
+                "titulo" => "Carrito | Datos de envio",
+                "data" => $data,
+                "menu" => true
+            ];
+            $this->vista("datosEnvioVista", $datos);
 
         }else{
             $datos = [
