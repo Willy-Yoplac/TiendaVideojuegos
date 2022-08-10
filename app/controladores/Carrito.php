@@ -106,7 +106,55 @@ class Carrito extends Controlador {
 
     public function verificar()
     {
-        var_dump($_POST);
+        $sesion = new Sesion();
+            
+        //Recuperamos el id del usuario
+        $usuario_id = $_SESSION["usuario"]["idUsuarios"];
+
+        //Leer los productos del carrito
+
+        $carrito = $this->modelo->getCarrito($usuario_id);
+
+        $pago = $_POST["pago"]?$_POST['pago']:"";
+        $data = $_SESSION["usuario"];
+        $datos = [
+            "titulo" => "Carrito | Verificar datos",
+            "pago" => $pago,
+            "data" => $data,
+            "carrito" => $carrito,
+            "menu" => true
+        ];
+        $this->vista("verificaVista", $datos);
+    }
+
+    public function gracias()
+    {
+        $sesion = new Sesion();
+        $data = $_SESSION["usuario"];
+        $usuario_id = $_SESSION["usuario"]["idUsuarios"];
+
+       if($carrito = $this->modelo->cierraCarrito($usuario_id,1)){
+            $datos = [
+            "titulo" => "Carrito | Gracias por su compra",
+            "data" => $data,
+            "menu" => true
+            ];
+        $this->vista("graciasVista", $datos);
+       } else {
+            $datos = [
+                "titulo" => "Error en la actualización del carrito",
+                "menu" => true,
+                "errores" => [],
+                "data" => [],
+                "subtitulo" => "Error en la actualización del carrito",
+                "texto" => "Existió un un problema al actualizar el estado del carrito. Prueba más tarde o comuníquese a nuestro servicio de soporte técnico.",
+                "color" => "alert-danger",
+                "url" => "tienda", //regresamos a tienda
+                "colorBoton" => "btn-danger",
+                "textoBoton" => "Regresar"
+                ];
+            $this->vista("mensajeVista",$datos);
+       }
     }
 }
 
