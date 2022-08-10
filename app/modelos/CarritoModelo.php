@@ -59,5 +59,12 @@ class CarritoModelo{
     	$sql.= "producto_id=".$producto_id;
     	return $this->db->queryNoSelect($sql);
     }
+
+    public function borrar($producto_id, $usuario_id)
+    {
+    	$sql = "DELETE FROM carrito WHERE usuario_id=".$usuario_id." AND ";
+    	$sql.= "producto_id=".$producto_id;
+    	return $this->db->queryNoSelect($sql);
+    }
 }
 ?>
