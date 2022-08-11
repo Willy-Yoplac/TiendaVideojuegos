@@ -88,6 +88,10 @@ crossorigin="anonymous"></script>
                 print "<li class='nav-item'>";
                 print "<a href='".RUTA."adminProductos' class='nav-link'>Productos</a>";
                 print "</li>";
+                print "</li>";
+                print "<li class='nav-item'>";
+                print "<a href='".RUTA."carrito/ventas' class='nav-link'>Ventas</a>";
+                print "</li>";
                 print "</ul>";
             }
         }

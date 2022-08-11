@@ -7,6 +7,7 @@ class Sesion{
 	private $usuario;
 
 	function __construct()
+	
 	{
 		session_start();
 		if (isset($_SESSION["usuario"])) {
@@ -14,10 +15,11 @@ class Sesion{
 			$this->login = true;
 
 			//Calculo del total del carrito
+			if(isset($_SESSION["usuario"]["idUsuarios"])){
+				$usuario_id = $_SESSION["usuario"]["idUsuarios"];
+			    $_SESSION["carrito"] = $this->totalCarrito($usuario_id);
 
-			$usuario_id = $_SESSION["usuario"]["idUsuarios"];
-			$_SESSION["carrito"] = $this->totalCarrito($usuario_id);
-			//var_dump($_SESSION["carrito"]);
+			}	
 
 		} else {
 			unset($this->usuario);

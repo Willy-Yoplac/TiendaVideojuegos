@@ -72,12 +72,26 @@ class CarritoModelo{
     public function cierraCarrito($usuario_id, $estado)
     {
         $sql = "UPDATE carrito ";
-        $sql.= "SET estado=".$estado." ";
+        $sql.= "SET estado=".$estado.", ";
+		$sql.= "fecha=(NOW()) ";
         $sql.= "WHERE usuario_id=".$usuario_id." AND ";
         $sql.= "estado=0";
         return $this->db->queryNoSelect($sql);
     }
 
+	public function ventas()
+	{
+		$sql = "SELECT SUM(p.precio*c.cantidad) as costo, ";
+		$sql.= "SUM(c.descuento) as descuento, ";
+		$sql.= "c.fecha as fecha, c.usuario_id as usuario_id ";
+		$sql.= "FROM carrito as c, productos as p ";
+		$sql.= "WHERE c.producto_id=p.idProducto AND ";
+		$sql.= "c.estado=1 ";
+		$sql.= "GROUP BY DATE(c.fecha), c.usuario_id";
+		//print $sql;
+		return $this->db->querySelect($sql);
+	}
+ 
 
 }
 ?>
