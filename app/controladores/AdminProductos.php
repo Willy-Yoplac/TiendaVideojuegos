@@ -300,6 +300,7 @@ if(empty($errores)){}
       //Enviamos el id del usuario
       $sesion = new Sesion();
       $idUsuario = $_SESSION["usuario"]["idUsuarios"];
+      
       //
       $datos = [
           "titulo" => "Productos",
