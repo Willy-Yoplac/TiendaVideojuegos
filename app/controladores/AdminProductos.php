@@ -132,7 +132,7 @@ class AdminProductos extends Controlador{
         "statusProducto" => $statusProducto,
         "data" => $data
     ];
-    var_dump($data);
+    //var_dump($data);
     
     $this->vista("adminProductosAltaVista",$datos);
     }

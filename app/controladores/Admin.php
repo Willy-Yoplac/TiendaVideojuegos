@@ -57,7 +57,6 @@ class Admin extends Controlador{
 				}
 
 			}
-
 	}
 	// Enviamos errores a la vista
 	$datos = [
