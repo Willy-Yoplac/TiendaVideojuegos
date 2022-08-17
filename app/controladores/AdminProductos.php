@@ -296,7 +296,7 @@ if(empty($errores)){}
     {
       //Leemos los datos del registro del IDProducto
       $data = $this->modelo->getProductoId($idProducto);
-      //
+      $dataComent = $this->modelo->getComentarioId($idProducto);
       //Enviamos el id del usuario
       $sesion = new Sesion();
       $idUsuario = $_SESSION["usuario"]["idUsuarios"];
@@ -310,9 +310,10 @@ if(empty($errores)){}
           "regresa" => $regresa,
           "idUsuarios" => $idUsuario,
           "errores" => [],
-          "data" => $data
+          "data" => $data,
+          "dataComent"=>$dataComent
       ];
-      
+   // var_dump($dataComent);
       $this->vista("productoVista",$datos);
     }
 }

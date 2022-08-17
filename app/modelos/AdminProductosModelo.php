@@ -29,6 +29,12 @@ class AdminProductosModelo{
     return $data;
   }
 
+  public function getComentarioId($idProducto){
+    $sql = "SELECT usuarios.`nombre`, comentarios.`comentario` FROM comentarios  INNER JOIN usuarios ON comentarios.`usuarios_id`=usuarios.`idUsuarios` WHERE producto_id=".$idProducto;
+    $dataComent = $this->db->querySelect($sql);
+    return $dataComent;
+  }
+
   public function bajaLogica($idProducto){
     $errores = array();
     $sql = "UPDATE productos SET baja=1 WHERE idProducto=".$idProducto;
