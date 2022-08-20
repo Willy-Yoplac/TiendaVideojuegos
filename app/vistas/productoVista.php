@@ -2,7 +2,8 @@
 
 print "<h2 class='text-center'>".$datos["subtitulo"]."</h2>";
 print "<img src='".RUTA."img/".$datos["data"]["imagen"]."' class='rounded float-right'/>";
-//Aventura y Deportes
+
+
 if ($datos["data"]["tipo"]==1) {
 	
 	print "<h4>Descripción:</h4>";
@@ -18,6 +19,7 @@ if ($datos["data"]["tipo"]==1) {
 	print "<p>$".number_format($datos["data"]["precio"],2)."</p>";
 	//Vista de comentarios
 	print "<h4>Comentarios</h4>"; 
+
 	print "<div class='card p-4 bg-light'>";
 	print "<table class='table table-striped' width='100%'>";
 	print "<thead>";
@@ -33,10 +35,29 @@ if ($datos["data"]["tipo"]==1) {
 			print "</tr>";
 		}
 	print "</tbody>";
-	print "";
+	
     print "</table>";
 	print "</div>";
 	
+	print "<div class='card p-4 bg-light'>";
+	print "<form action='".RUTA."AdminProductos/guardarComentario/' method='POST'>";
+	print "<div class='form-group text-left'>";
+	print "<label for='content'>Agregar comentario:</label>";
+	print "<input type='text' name='comentario' class='form-control' placeholder='Comentar...'>";
+	print "<div>";
+	
+	print "<input type='hidden' id='usuarios_id' name='usuarios_id' value='".$datos['idUsuarios']."'/>";
+	print "<input type='hidden' id='producto_id' name='producto_id' value='".$datos['data']['idProducto']."'/>";
+	
+	print "<input type='submit' value='Comentar' class='btn btn-success'>";
+	print "<br>";
+	
+	
+	print "</div>";
+	print "</form>";
+	print "</div>";
+	print "</div>";
+
 } else if($datos["data"]["tipo"]==2){
 	
 	print "<h4>Descripción:</h4>";

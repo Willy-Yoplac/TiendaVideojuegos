@@ -93,6 +93,18 @@ class AdminProductosModelo{
    
    return $this->db->queryNoSelect($sql);
   }
+
+  public function insertarComentario($data){
+    $sql = "INSERT INTO comentarios VALUES(0,"; 
+    $sql.= "'".$data['comentario']."', ";          
+    $sql.="(NOW()), " ;       
+    $sql.= "'".$data['usuarios_id']."', ";           //
+    $sql.= "'".$data['producto_id']."')";       //
+   
+    //print $sql;
+    
+    return $this->db->queryNoSelect($sql);
+   }
   
   public function getNuevos()
   {

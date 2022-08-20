@@ -313,9 +313,35 @@ if(empty($errores)){}
           "data" => $data,
           "dataComent"=>$dataComent
       ];
-   // var_dump($dataComent);
+
       $this->vista("productoVista",$datos);
     }
+
+    public function guardarComentario(){
+      $errores = array();
+      $data = array(); //para capturar solo el dato erroneo
+   
+      if ($_SERVER['REQUEST_METHOD']=="POST"){
+        $comentario = isset($_POST['comentario']) ? $_POST['comentario']:"";
+        $usuarios_id = isset($_POST['usuarios_id']) ? $_POST['usuarios_id']:"";
+        $producto_id = isset($_POST['producto_id']) ? $_POST['producto_id']:"";
+
+        $data = [
+         
+          "comentario" => $comentario,
+          "usuarios_id" => $usuarios_id,
+          "producto_id"=> $producto_id
+        ];
+
+        if(empty($errores)){
+          $this->modelo->insertarComentario($data);
+          
+        }
+
+      }
+
+    }
+    
 }
 
 
