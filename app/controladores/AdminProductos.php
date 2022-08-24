@@ -325,6 +325,8 @@ if(empty($errores)){}
         $comentario = isset($_POST['comentario']) ? $_POST['comentario']:"";
         $usuarios_id = isset($_POST['usuarios_id']) ? $_POST['usuarios_id']:"";
         $producto_id = isset($_POST['producto_id']) ? $_POST['producto_id']:"";
+        $ruta = isset($_POST['ruta']) ? $_POST['ruta']:"";
+
 
         $data = [
          
@@ -335,7 +337,10 @@ if(empty($errores)){}
 
         if(empty($errores)){
           $this->modelo->insertarComentario($data);
-          
+          //header("location:".RUTA."productoVista");
+          //header("location:".RUTA."AdminProductos/producto");
+          header("location:".RUTA."AdminProductos/producto/".$producto_id);
+
         }
 
       }

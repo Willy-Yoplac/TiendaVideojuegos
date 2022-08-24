@@ -48,6 +48,7 @@ if ($datos["data"]["tipo"]==1) {
 	
 	print "<input type='hidden' id='usuarios_id' name='usuarios_id' value='".$datos['idUsuarios']."'/>";
 	print "<input type='hidden' id='producto_id' name='producto_id' value='".$datos['data']['idProducto']."'/>";
+	print "<input type='hidden' id='ruta' name='ruta' value='".RUTA."img/".$datos["data"]["imagen"]."'/>";
 	
 	print "<input type='submit' value='Comentar' class='btn btn-success'>";
 	print "<br>";

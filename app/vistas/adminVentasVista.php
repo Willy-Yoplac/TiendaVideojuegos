@@ -1,5 +1,5 @@
 <?php include_once("encabezado.php"); ?>
-<h1 class="text-center">Ventas</h1>
+<h1 class="text-center">Ventas del Día</h1>
 <div class="card p-4 bg-light">
 	<table class="table table-striped" width="100%">
 	<thead>
@@ -12,7 +12,7 @@
 	</thead>
 	<tbody>
 		<?php
-        var_dump($datos["data"]);
+        //var_dump($datos["data"]);
         
         /*
 		for($i=0; $i<count($datos['data']); $i++){
@@ -37,6 +37,6 @@
 	</tbody>
 
 	</table>
-	<a href="<?php print RUTA; ?>adminProductos/alta" class="btn btn-success">Añadir un nuevo producto</a>
+	<a href="<?php print RUTA; ?>adminProductos/alta" class="btn btn-success">Regresar</a>
 </div>
 <?php include_once("piepagina.php"); ?>
