@@ -30,10 +30,13 @@ class AdminProductosModelo{
   }
 
   public function getComentarioId($idProducto){
-    $sql = "SELECT usuarios.`nombre`, comentarios.`comentario`";
+    $sql = "SELECT usuarios.`nombre`, comentarios.`comentario`, ";
+    $sql.=" comentarios.`producto_id`, comentarios.`idComentarios`, comentarios.`usuarios_id`";
     $sql.= " FROM comentarios  INNER JOIN usuarios";
     $sql.= " ON comentarios.`usuarios_id`=usuarios.`idUsuarios`"; 
     $sql.= " WHERE producto_id=".$idProducto;
+
+    //print $sql;
 
     $dataComent = $this->db->querySelect($sql);
     return $dataComent;
@@ -47,6 +50,15 @@ class AdminProductosModelo{
     }
     return $errores;
   }
+
+  public function elminaComentario($idComentaios, $usuarios_id)
+    {
+    	$sql = "DELETE FROM comentarios WHERE idComentarios=".$idComentaios." AND ";
+    	$sql.= "usuarios_id=".$usuarios_id;
+      print $sql;
+    	return $this->db->queryNoSelect($sql);
+    }
+
 
   public function modificaProducto($data){
     $errores = array();

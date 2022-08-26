@@ -311,7 +311,8 @@ if(empty($errores)){}
           "idUsuarios" => $idUsuario,
           "errores" => [],
           "data" => $data,
-          "dataComent"=>$dataComent
+          "dataComent"=>$dataComent,
+          "idProducto"=>$idProducto
       ];
 
       $this->vista("productoVista",$datos);
@@ -337,14 +338,23 @@ if(empty($errores)){}
 
         if(empty($errores)){
           $this->modelo->insertarComentario($data);
-          //header("location:".RUTA."productoVista");
-          //header("location:".RUTA."AdminProductos/producto");
+          
           header("location:".RUTA."AdminProductos/producto/".$producto_id);
 
         }
 
       }
 
+    }
+
+    public function bajaComentario($idComentaios, $usuarios_id)
+    {
+      
+      $errores = array();
+      if (!$this->modelo->elminaComentario($idComentaios, $usuarios_id)) {
+          array_push($errores, "Error en el registro del carrito");
+      }
+      
     }
     
 }

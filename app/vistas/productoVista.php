@@ -25,13 +25,18 @@ if ($datos["data"]["tipo"]==1) {
 	print "<thead>";
 	print "<th>Usuario</th>";
 	print "<th>Comentario</th>";
+	print "<th>Borrar</th>";
 	print "</thead>";
 
 	print "<tbody>";
-		for($i=0; $i<count($datos["dataComent"]); $i++){	
+		for($i=0; $i<count($datos["dataComent"]); $i++){
+			$idComentarios=	$datos["dataComent"][$i]["idComentarios"];
+			//$usuarios_id= $datos["dataComent"][$i]["usuarios_id"];
+			$usuarios_id=$datos["idUsuarios"];
 			print "<tr>";
 			print "<td class='text-left'>".$datos["dataComent"][$i]["nombre"]."</td>";
 			print "<td class='text-left'>".$datos["dataComent"][$i]["comentario"]."</td>";
+			print "<td><a href='".RUTA."adminProductos/bajaComentario/".$idComentarios.'/'.$usuarios_id."' class='btn btn-danger'>Borrar</a></td>";
 			print "</tr>";
 		}
 	print "</tbody>";
