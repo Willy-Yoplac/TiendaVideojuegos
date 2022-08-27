@@ -17,7 +17,6 @@ class Tienda extends Controlador {
             //Leer los productos que SI son nuevos
             $nuevos = $this->getNuevos1();
 
-
     		$datos = [
                 "titulo" => "Bienvenido a Zona-Games",
                 "data" => $data,
