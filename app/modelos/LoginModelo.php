@@ -67,12 +67,18 @@ class LoginModelo{
       }
 
     function enviarCorreo($email){
+        
+        require_once ("PHPMailer/clsMail.php");
+        $mailSend = new clsMail();
+       
+        
+
         $data = $this->getUsuarioCorreo($email);
         $id = $data["idUsuarios"];
         $nombre = $data["nombre"]." ".$data["apellidoPaterno"]." ".$data["apellidoMaterno"];
-        $msg = $nombre.", entra a la siguiente liga para cambiar tu clave de acceso a la tienda 
-        Zona Games ''<br>";
-        $msg.= "<a href='".RUTA."/login/cambiaclave/".$id."'>Cambia tu clave de acceso</a>";
+        $msg = $nombre.", entra a la siguiente enlace para cambiar tu clave de acceso a la tienda 
+        Zona Games. <br>";
+        $msg.= "<a href=' http://localhost/TiendaVirtual/login/cambiaclave/".$id."'>Cambia tu clave de acceso</a>";
 
         $headers = "MIME-Version: 1.0\r\n";
         //r retorno de carro y n nueva linea  
@@ -81,6 +87,7 @@ class LoginModelo{
         $headers .= "Replay-to: willy.yoplac@unmsm.edu.pe\r\n";
 
         $asunto = "Cambiar clave de acceso";
+        $enviado =  $mailSend->metEnviar("Administracion Zona-Games","Usuarios Zona-Games",$email,$asunto, $msg);
 
         return (@mail($email,$asunto, $msg, $headers));
     }
