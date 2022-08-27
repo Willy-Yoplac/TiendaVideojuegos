@@ -80,23 +80,49 @@ if ($datos["data"]["tipo"]==1) {
 
 	//Vista de comentarios
 	print "<h4>Comentarios</h4>"; 
+
 	print "<div class='card p-4 bg-light'>";
 	print "<table class='table table-striped' width='100%'>";
 	print "<thead>";
 	print "<th>Usuario</th>";
 	print "<th>Comentario</th>";
+	print "<th>Borrar</th>";
 	print "</thead>";
 
 	print "<tbody>";
-		for($i=0; $i<count($datos["dataComent"]); $i++){	
+		for($i=0; $i<count($datos["dataComent"]); $i++){
+			$idComentarios=	$datos["dataComent"][$i]["idComentarios"];
+			//$usuarios_id= $datos["dataComent"][$i]["usuarios_id"];
+			$usuarios_id=$datos["idUsuarios"];
 			print "<tr>";
 			print "<td class='text-left'>".$datos["dataComent"][$i]["nombre"]."</td>";
 			print "<td class='text-left'>".$datos["dataComent"][$i]["comentario"]."</td>";
+			print "<td><a href='".RUTA."adminProductos/bajaComentario/".$idComentarios.'/'.$usuarios_id."' class='btn btn-danger'>Borrar</a></td>";
 			print "</tr>";
 		}
 	print "</tbody>";
-	print "";
+	
     print "</table>";
+	print "</div>";
+	
+	print "<div class='card p-4 bg-light'>";
+	print "<form action='".RUTA."AdminProductos/guardarComentario/' method='POST'>";
+	print "<div class='form-group text-left'>";
+	print "<label for='content'>Agregar comentario:</label>";
+	print "<input type='text' name='comentario' class='form-control' placeholder='Comentar...'>";
+	print "<div>";
+	
+	print "<input type='hidden' id='usuarios_id' name='usuarios_id' value='".$datos['idUsuarios']."'/>";
+	print "<input type='hidden' id='producto_id' name='producto_id' value='".$datos['data']['idProducto']."'/>";
+	print "<input type='hidden' id='ruta' name='ruta' value='".RUTA."img/".$datos["data"]["imagen"]."'/>";
+	
+	print "<input type='submit' value='Comentar' class='btn btn-success'>";
+	print "<br>";
+	
+	
+	print "</div>";
+	print "</form>";
+	print "</div>";
 	print "</div>";
 }
 $regresa = ($datos["regresa"]=="")? "tienda" : $datos["regresa"];

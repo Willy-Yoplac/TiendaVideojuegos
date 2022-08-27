@@ -124,6 +124,17 @@ class Carrito extends Controlador {
             "carrito" => $carrito,
             "menu" => true
         ];
+        
+        //var_dump($pago); //medio de pago
+
+        $nombre=$data["nombre"]." ".$data["apellidoPaterno"];
+    
+       // print "<br>";
+         var_dump($nombre);
+        // print "<br>";
+        // var_dump($apellido);
+        $email=$data["email"];
+        $this->modelo->enviarCorreo($email,$nombre);
         $this->vista("verificaVista", $datos);
     }
 

@@ -70,13 +70,11 @@ class LoginModelo{
         
         require_once ("PHPMailer/clsMail.php");
         $mailSend = new clsMail();
-       
-        
 
         $data = $this->getUsuarioCorreo($email);
         $id = $data["idUsuarios"];
         $nombre = $data["nombre"]." ".$data["apellidoPaterno"]." ".$data["apellidoMaterno"];
-        $msg = $nombre.", entra a la siguiente enlace para cambiar tu clave de acceso a la tienda 
+        $msg = $nombre.", entra al siguiente enlace para cambiar tu clave de acceso a la tienda 
         Zona Games. <br>";
         $msg.= "<a href=' http://localhost/TiendaVirtual/login/cambiaclave/".$id."'>Cambia tu clave de acceso</a>";
 

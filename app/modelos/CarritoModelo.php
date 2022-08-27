@@ -91,7 +91,24 @@ class CarritoModelo{
 		//print $sql;
 		return $this->db->querySelect($sql);
 	}
- 
+	function enviarCorreo($email,$nombre){
+       
+        require_once ("PHPMailer/clsMail.php");
+        $mailSend = new clsMail();
+  
+        $msg = "Sñr(a) ".$nombre.", gracias por su compra. <br>";
+        $msg.= "<a href=' http://localhost/TiendaVirtual/login/cambiaclave/".""."'>Cambia tu clave de acceso</a>";
 
+        $headers = "MIME-Version: 1.0\r\n";
+        //r retorno de carro y n nueva linea  
+        $headers .= "Content-type:text/html; charset=UTF-8\r\n"; 
+        $headers .= "From: Zona-Games\r\n"; 
+        $headers .= "Replay-to: willy.yoplac@unmsm.edu.pe\r\n";
+
+        $asunto = "Cambiar clave de acceso";
+        $enviado =  $mailSend->metEnviar("Administracion Zona-Games","Usuarios Zona-Games",$email,$asunto, $msg);
+
+        return (@mail($email,$asunto, $msg, $headers));
+    }
 }
 ?>
