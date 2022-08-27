@@ -26,8 +26,6 @@ class Aventura extends Controlador {
     	} else {
     		header("location:".RUTA);
     	}
-    	
-         
     }
 
     public function getAventura(){

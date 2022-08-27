@@ -20,6 +20,7 @@ crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
         <a href="<?php print RUTA."tienda"; ?>" class="navbar-brand">Tienda Zona-Games</a>
         <div class="collapse navbar-collapse" id="menu">
         <?php if ($datos["menu"]){
@@ -50,7 +51,27 @@ crossorigin="anonymous"></script>
             print "</ul>";
 
             // Derecha -> Salir
-            print "<ul class='nav navbar-nav mr-auto mt-2 mt-lg-0 navbar-right'>";
+            
+            //
+            print "<li class='nav-item'>";
+            print "</li>";
+
+            ?>
+            
+            <form class="d-flex justify-content-center" action="<?php print RUTA; ?>buscar/producto" method="POST">Buscar:
+                <div class='container'>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+                    <input type="text" name="buscar" id="buscar" class="form-control" size="20" placeholder="Buscar un producto">
+                    <div class="float-end">
+                    <button type="submit" class="btn btn-success float-top">Buscar</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+            
+            
+            <?php
+            print "<ul class='nav navbar-nav ms-auto mt-2 mt-lg-0 navbar-end'>";
             //
             if (isset($_SESSION["carrito"]) && $_SESSION["carrito"] > 0) {
                 print "<li class='nav-item'>";
@@ -59,24 +80,31 @@ crossorigin="anonymous"></script>
                 print "</a>";
                 print "</li>";
             }
-            //
+            ?>
+
+            <?php
             print "<li class='nav-item'>";
+            print "<a href='".RUTA."login' class='nav-link ";
+            if(isset($datos["activo"]) && $datos["activo"]=="login") print "active";
+            print "'>Nombre: ".$_SESSION["usuario"]["nombre"]." ".$_SESSION["usuario"]["apellidoPaterno"];
+            print "</a>";
+            print "</li>";
+            ?>
+            
+            <?php
+            print "<li class='nav-item text-end'>";
             print "<a href='".RUTA."tienda/logout' class='nav-link'>Logout</a>";
             print "</li>";
             print "</ul>";
-
-            print "<ul class='nav navbar-nav navbar-right'>";
-            //
-            print "<li class='nav-item'>";
-            print "</li>";
+            print "<ul class='nav navbar-nav navbar-end'>";
             ?>
-            <form action="<?php print RUTA; ?>buscar/producto" class="form-inline" method="POST">Buscar:
-                <input type="text" name="buscar" id="buscar" class="form-control" size="20" placeholder="Buscar un producto">
-                <button type="submit" class="btn btn-success">Buscar</button>
-            </form>
+
             <?php
+
             print "</ul>";
             //
+
+
         }
         
         if(isset($datos["admin"])){
@@ -113,4 +141,4 @@ crossorigin="anonymous"></script>
                 }
             }
 
-            ?>
+?>
