@@ -1,5 +1,5 @@
 <?php include_once("encabezado.php");   ?>
-<h1 class="text-center">Modifica un usuario Admin</h1>
+<h1 class="text-center">Modifica un usuario Adminnistrativo</h1>
 <div class="card p-4 bg-light">
     <form action="<?php print RUTA; ?>adminUsuarios/cambio/" method="POST">
      <div class="form-group text-left"> 

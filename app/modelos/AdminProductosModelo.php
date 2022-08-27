@@ -16,14 +16,6 @@ class AdminProductosModelo{
     return $data;
   }
 
-  public function getCatalogo(){
-    $sql = "SELECT idProducto, nombre, tipo FROM productos ";
-    $sql.= "WHERE baja=0 AND status=1 ";
-    $sql.= "Order by tipo, nombre ";
-    $data = $this->db->querySelect($sql);
-    return $data;
-  }
-
   public function getLlaves($tipo){
     $sql = "SELECT * FROM llaves WHERE tipo='".$tipo. "'"; 
    
@@ -76,8 +68,8 @@ class AdminProductosModelo{
   }
 
   public function altaProducto($data){
-    $sql = "INSERT INTO productos VALUES(0,"; 
-    $sql.= "'".$data['tipo']."', ";          
+   $sql = "INSERT INTO productos VALUES(0,"; 
+   $sql.= "'".$data['tipo']."', ";          
    $sql.= "'".$data['nombre']."', ";          
    $sql.= "'".$data['descripcion']."', ";     
    $sql.= $data['precio'].", ";               
@@ -91,7 +83,7 @@ class AdminProductosModelo{
    $sql.= "'".$data['desarrolladora']."', ";           //
    $sql.= "'".$data['editor']."')";       //
   
-   print $sql;
+   //print $sql;
    
    return $this->db->queryNoSelect($sql);
   }

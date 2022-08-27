@@ -23,7 +23,6 @@ class AdminModelo{
 		WHERE correo='".$data['usuario']."'";
         $data = $this ->db->query($sql);
 		
-
 		//Validacion
 		if(empty($data)){
 			array_push($errores, "No existe el usuario");
@@ -35,15 +34,8 @@ class AdminModelo{
 		}
 		else if(count($data)>3){
 			array_push($errores, "El correo electronico esta duplicado");
-		}else{
-			//para probar
-			echo "Todo estubo bien";
-			if(!$this->db->queryNoSelect($sql)){
-				array_push($errores, "Algo esta fallando");
-
-			}
-
 		}
+		//Borre una parte que estaba de prueba
 		//Regresamos los errores
 		return $errores;
 	}

@@ -25,6 +25,6 @@
 	</tbody>
 
 	</table>
-	<a href="<?php print RUTA; ?>adminUsuarios/alta" class="btn btn-success">Crear nuevo Admin</a>
+	<a href="<?php print RUTA; ?>adminUsuarios/alta" class="btn btn-success">Crear nuevo Administrador</a>
 </div>
 <?php include_once("piepagina.php"); ?>

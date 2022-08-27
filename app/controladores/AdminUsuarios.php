@@ -198,7 +198,9 @@ class AdminUsuarios extends Controlador{
       }
     }
       $data = $this->modelo->getUsuarioId($idAdmin);
+      //Tabla de llabes 
       $llaves = $this->modelo->getLlaves("adminStatus");
+      //Mandamos los datos 
       $datos = [
         "titulo" => "Administrativo Usuarios Modifica",
         "menu" => false,
